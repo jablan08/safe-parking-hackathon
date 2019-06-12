@@ -4,7 +4,7 @@ const router = express.Router();
 const Resource = require("../models/Resource")
 
 
-/* GET home page. */
+/* Get all resources */
 router.get('/', async (req, res) => {
   
   try {
@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Create resource
 router.post('/new', async (req, res) => {
   try {
     console.log(req.body)
@@ -28,6 +29,7 @@ router.post('/new', async (req, res) => {
   } 
 });
 
+// Delete resource
 router.delete('/:id', async (req, res) => {
   try {
     const deletedResource = await Resource.findByIdAndRemove(req.params.id)
@@ -39,6 +41,20 @@ router.delete('/:id', async (req, res) => {
     console.log(error)
   }
 })
+
+//Edit resource
+
+router.put('/:id', async (req,res)=> {
+  try {
+    const editedResource = await Resource.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    editedResource.save()
+    res.json({
+      editedResource
+    });
+  } catch (error) {
+    res.json({error})
+  }
+});
 
 
 

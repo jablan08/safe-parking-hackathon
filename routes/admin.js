@@ -2,38 +2,53 @@ const express = require('express');
 const router = express.Router();
 
 const Admin = require("../models/Admin")
+const bcrypt = require('bcryptjs')
 
-router.post("/", async (req,res) =>{
+// Register 
+router.post("/login", async (req,res) =>{
   try {
       
-      const foundAdmin = await Client.findOne({email: req.body.email}) 
-
+      const foundAdmin = await Admin.findOne({"email": req.body.email}) 
+      console.log(foundAdmin)
       if (foundAdmin){
+        console.log("here")
         if(foundAdmin.validPassword(req.body.password)) {
-            req.session.logged = true;
-            req.session.email = req.body.email;
-            req.session.userDbId = foundAdmin._id;
-            console.log(req.session)
+            // req.session.logged = true;
+            // req.session.email = req.body.email;
+            // req.session.userDbId = foundAdmin._id;
+            // console.log(req.session)
             res.json({
                 user: foundAdmin,
                 status: 200,
                 success: foundAdmin ? true : false
             })
         } else {
-            req.session.message = "Invalid Email or Password"
+            // req.session.message = "Invalid Email or Password"
             res.json({
-                message: req.session.message
+                message: "req.session.message"
             })
         }
       } 
   } catch (error) {
-      req.session.message = "Invalid Username or Password"
+      // req.session.message = "Invalid Username or Password"
       res.json({
-          message: req.session.message
+          message: "req.session.message"
       })
   }
 })
 
+// show admin
+router.get("/:id", async (req,res)=>{
+  try {
+    const admin = await Admin.findById(req.params.id)
+    
+    res.json({admin})
+  } catch (error) {
+    res.json(error)
+  }
+})
+
+// Edit
 router.put('/:id', async (req, res) => {
   if(!req.body.password){
     delete req.body.password
@@ -51,21 +66,24 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// Delete
 router.delete('/:id', async (req, res) => {
   try {
     const deletedAdmin = await Admin.findByIdAndRemove(req.params.id)
-    await Client.deleteMany({_id: { $in: deletedAdmin.clients }})
+    await Admin.deleteMany({_id: { $in: deletedAdmin.clients }})
     res.json(deletedAdmin)
   } catch (error) {
     console.log(error)
   }
 })
 
+//Create Admin
 router.post('/new', async (req, res) => {
   try {
     console.log(req.body)
     const newAdmin = await Admin.create(req.body)
     console.log(newAdmin)
+    console.log("hit")
     res.json({
       newAdmin,
       success: newAdmin ? true : false
@@ -75,6 +93,7 @@ router.post('/new', async (req, res) => {
     res.json(error)
   } 
 });
+
 
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {

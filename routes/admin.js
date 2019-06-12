@@ -66,6 +66,7 @@ router.post('/new', async (req, res) => {
     console.log(req.body)
     const newAdmin = await Admin.create(req.body)
     console.log(newAdmin)
+    console.log("hit")
     res.json({
       newAdmin,
       success: newAdmin ? true : false

@@ -2,39 +2,42 @@ const express = require('express');
 const router = express.Router();
 
 const Admin = require("../models/Admin")
+const bcrypt = require('bcryptjs')
 
 // Register 
 router.post("/login", async (req,res) =>{
   try {
       
-      const foundAdmin = await Admin.findOne({email: req.body.email}) 
-
+      const foundAdmin = await Admin.findOne({"email": req.body.email}) 
+      console.log(foundAdmin)
       if (foundAdmin){
+        console.log("here")
         if(foundAdmin.validPassword(req.body.password)) {
-            req.session.logged = true;
-            req.session.email = req.body.email;
-            req.session.userDbId = foundAdmin._id;
-            console.log(req.session)
+            // req.session.logged = true;
+            // req.session.email = req.body.email;
+            // req.session.userDbId = foundAdmin._id;
+            // console.log(req.session)
             res.json({
                 user: foundAdmin,
                 status: 200,
                 success: foundAdmin ? true : false
             })
         } else {
-            req.session.message = "Invalid Email or Password"
+            // req.session.message = "Invalid Email or Password"
             res.json({
-                message: req.session.message
+                message: "req.session.message"
             })
         }
       } 
   } catch (error) {
-      req.session.message = "Invalid Username or Password"
+      // req.session.message = "Invalid Username or Password"
       res.json({
-          message: req.session.message
+          message: "req.session.message"
       })
   }
 })
 
+// show admin
 router.get("/:id", async (req,res)=>{
   try {
     const admin = await Admin.findById(req.params.id)
@@ -63,6 +66,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// Delete
 router.delete('/:id', async (req, res) => {
   try {
     const deletedAdmin = await Admin.findByIdAndRemove(req.params.id)
@@ -89,6 +93,7 @@ router.post('/new', async (req, res) => {
     res.json(error)
   } 
 });
+
 
 router.post('/logout', (req, res) => {
   req.session.destroy((err) => {

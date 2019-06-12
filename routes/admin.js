@@ -35,6 +35,17 @@ router.post("/login", async (req,res) =>{
   }
 })
 
+router.get("/:id", async (req,res)=>{
+  try {
+    const admin = await Admin.findById(req.params.id)
+    
+    res.json({admin})
+  } catch (error) {
+    res.json(error)
+  }
+})
+
+// Edit
 router.put('/:id', async (req, res) => {
   if(!req.body.password){
     delete req.body.password

@@ -19,6 +19,11 @@ router.get('/', async (req, res) => {
 router.post('/new', async (req, res) => {
   try {
     console.log(req.body)
+    if(req.body.walkInsAllowed==="on"){
+      req.body.walkInsAllowed=true
+    }else{
+      req.body.walkInsAllowed=false
+    }
     const newResource = await Resource.create(req.body)
     console.log(newResource)
     res.json({

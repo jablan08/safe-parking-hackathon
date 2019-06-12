@@ -3,10 +3,11 @@ const router = express.Router();
 
 const Admin = require("../models/Admin")
 
-router.post("/", async (req,res) =>{
+// Register 
+router.post("/login", async (req,res) =>{
   try {
       
-      const foundAdmin = await Client.findOne({email: req.body.email}) 
+      const foundAdmin = await Admin.findOne({email: req.body.email}) 
 
       if (foundAdmin){
         if(foundAdmin.validPassword(req.body.password)) {
@@ -54,13 +55,14 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     const deletedAdmin = await Admin.findByIdAndRemove(req.params.id)
-    await Client.deleteMany({_id: { $in: deletedAdmin.clients }})
+    await Admin.deleteMany({_id: { $in: deletedAdmin.clients }})
     res.json(deletedAdmin)
   } catch (error) {
     console.log(error)
   }
 })
 
+//Create Admin
 router.post('/new', async (req, res) => {
   try {
     console.log(req.body)

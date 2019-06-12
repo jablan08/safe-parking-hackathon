@@ -9,27 +9,30 @@ class Search extends Component{
       
     }
 
-    handleChange = async(e) => {
+    handleChange = (e) => {
         e.preventDefault()
-        await this.setState({[e.currentTarget.name]: e.currentTarget.value});
+        this.setState({[e.currentTarget.name]: e.currentTarget.value});
       
     }
 
     handleSubmit = (e)=>{
         e.preventDefault()
         this.props.searching(this.state.search)
+
         
     }
 
   render(){
       const { search } = this.state
+      console.log(search, "from search")
       return(
           <div>
-          <form onChange={this.handleSubmit}> 
-              <input type='text' name="search" placeholder="search" 
-              value={this.state.username} onChange={this.handleChange} autoComplete="off"/>
-              
-          </form></div>
+            <form onSubmit={(e)=>this.handleSubmit(e)}> 
+                <input type='text' name="search" placeholder="search" 
+                value={search} onChange={(e)=>this.handleChange(e)} autoComplete="off" style={{height:"200px"}}/>
+                <button type="submit"> Submit</button>
+            </form>
+          </div>
       )
 
   }

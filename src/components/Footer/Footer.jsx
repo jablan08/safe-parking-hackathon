@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import ResourceList from '../ResourceList/ResourceList'
 class Footer extends Component {
 	state = {
         
@@ -21,7 +21,7 @@ class Footer extends Component {
                 {this.props.clicked ?
                 <div>CLICKED THING</div>
             :
-            <div>GENERAL LIST</div>
+            <div><ResourceList resources={this.props.resource}/></div>
             }
 
             </div>

@@ -10,7 +10,8 @@ import * as routes from "./constants/routes";
 import Map from '../src/components/Map/Map'
 class App extends Component {
   state = {
-    currentUser: {}
+    currentUser: {},
+    showFilterBar: false
   }
   componentDidMount() {
     const current = localStorage.getItem("user");
@@ -28,6 +29,16 @@ class App extends Component {
       
     })
   }
+  openBar = ()=>{
+    this.setState({
+      showFilterBar: true
+    })
+  }
+  closeBar = ()=>{
+    this.setState({
+      showFilterBar: false
+    })
+  }  
   doLogout= async () => {
     await fetch("/login/logout", {
       credentials: "include",
@@ -43,12 +54,12 @@ class App extends Component {
     this.props.history.push(routes.ROOT)
   }
   render() {
-    const { currentUser } = this.state 
+    const { currentUser, showFilterBar } = this.state 
     return ( 
       <div>
-         <Navbar className="navbar" />
+         <Navbar className="navbar" currentUser={currentUser} showFilterBar={showFilterBar} openBar={this.openBar}/>
          <Switch>
-          <Route exact path={routes.ROOT} render={()=>  <Map /> }/> 
+          <Route exact path={routes.ROOT} render={()=>  <Map showFilterBar={showFilterBar}/> }/> 
           <Route exact path={routes.REGISTER} render={() => <Register currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.LOGIN} render={()=> <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.POST} render={()=> <NewResource currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />

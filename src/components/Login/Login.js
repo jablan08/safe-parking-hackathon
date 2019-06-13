@@ -10,14 +10,14 @@ const LoginContainer = styled.div`
 
 const MainBox = styled.div`
 	.sub-log-box {
-		margin:0 auto;
-		width:40rem;
-		height:40rem;
-		text-align:center;
+		display: flex;
+    flex-direction: column;
+    height: 40rem;
+    align-items: center;
 		
 	}
 	button {
-		width: 30%;
+		width: 100%;
     height: 2rem;
     background-color: rgb(152,201,228);
     border-color: rgb(94,172,215);
@@ -27,11 +27,10 @@ const MainBox = styled.div`
 		
 	}
 	input{
-		width: 30%;
-    border: .01rem solid gray;
-    padding: 1rem;
+		border: .01rem solid gray;
+    padding: 1rem 2rem 1rem;
     line-height: .01rem;
-    font-size: .8em;
+    font-size: 1.2em;
 	}
 	br{
 		line-height:1px
@@ -97,7 +96,6 @@ class Login extends Component {
 													</div>
 													<div className="login-box">
 															<form onSubmit={e => this.handleSubmit(e)}>
-																			
 																			<input className="input-box" type="text" name="splaId" placeholder="Enter SPLA ID" onChange={this.handleChange} value={splaId}/><br/>
 																			
 																			<input className="input-box" type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>

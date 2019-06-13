@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import Search from "../Search/Search"
 import Geocode from "react-geocode"
+import styled from "styled-components";
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
 
+
+const MainContainer = styled.div`
+  .map {
+    width: 100%;
+    height:100%;
+    z-index: -1;
+  }
+`
 Geocode.setApiKey('AIzaSyBbcC3bMFjuryUo-PkKcNze8g_kD-TuSm4');
 Geocode.enableDebug();
 
@@ -97,13 +106,13 @@ export class MapContainer extends Component {
         website: "",
         address: "1711 N Van Ness Ave Hollywood, CA 90028",
         email: "",
-        phone: "",
+        phone: "323-464-8455",
         hoursOfOperation: "T: 10:00AM – 3:00PM",
         walkInsAllowed: "",
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "",
-        lat: 34.3155072,
+        lat: 34.102178,
         lng: -118.2096814
     },
       {
@@ -162,7 +171,7 @@ export class MapContainer extends Component {
         lng: -118.2422388
     },
       {
-        resource: "Access Point Center",
+        resource: "Mental Health",
         servicePlanningArea: "SPA 4 - Metro LA",
         operator: "Exodus Mental Health",
         website: "https://www.exodusrecovery.com/eastside-marengo-street/",
@@ -209,11 +218,28 @@ export class MapContainer extends Component {
         lat: 34.0609786,
         lng: -118.2834131
     },
+      {
+        resource: "SPLA Parking",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "SPLA Parking",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: 33.7679965,
+        lng: -118.2834131
+    },
   ],
     filtered: [],
     showingInfoWindow: false,
     activeMarker: {},
-    selectedResource: {}
+    selectedResource: {},
+    zoom: 15
     
   }
   
@@ -241,10 +267,13 @@ export class MapContainer extends Component {
       );
     }
     handleClick = (props, marker, e, i) => {
+      const { resource } = this.state
       this.setState({
           showingInfoWindow: true,
           activeMarker: marker,
-          selectedResource: this.state.resource[i]
+          selectedResource: this.state.resource[i],
+          center: {lat: resource[i].lat, lng: resource[i].lng},
+          zoom: 18
       })
     }
     componentDidMount(){
@@ -255,35 +284,48 @@ export class MapContainer extends Component {
     searching = (theSearch) => {
       this.setState({
         search: theSearch,
-        center: {}
+        center: {},
       })
       this.setSearch(theSearch)
     } 
       render() {
         
-        const { center, lat, lng, resource } = this.state
+        const { center, lat, lng, resource, zoom } = this.state
         return (
-          <>
-            <Search searching={this.searching}/>
-            <Map 
+          <MainContainer>
+            <Map  
               google={this.props.google} 
-              zoom={15} 
+              className="map"
+              zoom={zoom} 
               initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
-              center={center.lat ? center : {lat:lat, lng:lng}} style={{width: '100%', height: '100%'}} >
+              center={center.lat ? center : {lat:lat, lng:lng}} >
               {
                 resource.map((r,i)=>
                 
                 <Marker key={i}
                     position={{lat: r.lat, lng: r.lng}}
                     icon={{
-                        url: "/images/foodPointer.png",
-                        width: 15, height: 20}  
+                        url: 
+                        
+                          r.resource === "Meals"
+                          ? "/images/foodPointer.png"
+                          : r.resource === "Free groceries"
+                            ? "/images/groceriesPointer.png"
+                            : r.resource === "Mental Health"
+                              ? "/images/mentalHealthPointer.png"
+                              : r.resource === "Substance Abuse"
+                                ? "/images/hospitalPointer.jpg"
+                                : r.resource === "SPLA Parking"
+                                  && "/images/parkingPointer.png",
+                        width: 15, height: 20
+                      }  
                   }
                     onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
                     >
                 </Marker>
                 )
                 }
+                <Search searching={this.searching}/>
                 {
                     this.state.showingInfoWindow
                     &&
@@ -297,7 +339,7 @@ export class MapContainer extends Component {
 
             </Map>
           
-          </>
+          </MainContainer>
   
   )
 }

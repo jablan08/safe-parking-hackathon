@@ -409,24 +409,15 @@ export class MapContainer extends Component {
                   &&
                   <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
                       <div>
-                          <h3>{this.state.selectedResource.operator}</h3>
+                          <h3>{this.state.selectedResource.operator}</h3><br/>
+                          <b>{this.state.selectedResource.resource}</b><br/>
+                          {this.state.selectedResource.phone}
                       </div>
                   </InfoWindow>
               }
           </Map>
-              <Footer 
-                className="footer" 
-                clicked={this.state.clicked} 
-                resource=
-                { 
-                  this.state.filtered.length > 0
-                  ?
-                  this.state.filtered
-                  :
-                  this.state.resource
-                } 
-              selected={this.state.selectedResource}/>
-            {/* <button className="filter-btn"onClick={this.openBar}><img src="/images/Filter.png"/></button> */}
+          <button onClick={this.openBar}>OPEN</button>
+        
         </MainContainer>
         </>
                    

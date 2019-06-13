@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer } from 'mdbreact';
 import * as routes from '../../constants/routes'
+import styled from "styled-components";
+
+const MainContainer = styled(MDBContainer)`
+  position:absolute;
+`
+
 class Navbar extends Component {
 state = {
   collapseID: ''
@@ -12,11 +18,11 @@ toggleCollapse = collapseID => () => {
 
 render() {
   return (
-    <MDBContainer>
+    <MainContainer>
       <MDBNavbar color="light-blue lighten-4" style={{ marginTop: '20px', 'opacity': .73 }} light>
         <MDBContainer>
           <MDBNavbarBrand>
-            Safe Parking LA
+            <img className="img-logo" src="/images/Logo.png"/>
           </MDBNavbarBrand>
           <MDBNavbarToggler onClick={this.toggleCollapse('navbarCollapse1')} />
           <MDBCollapse id="navbarCollapse1" isOpen={this.state.collapseID} navbar>
@@ -37,7 +43,7 @@ render() {
           </MDBCollapse>
         </MDBContainer>
       </MDBNavbar>
-    </MDBContainer>
+    </MainContainer>
     );
   }
 }

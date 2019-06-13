@@ -256,7 +256,8 @@ export class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedResource: {},
-      zoom: 15
+      zoom: 15,
+      showFilterBar: false
       
     }
 

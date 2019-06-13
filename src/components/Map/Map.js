@@ -112,7 +112,7 @@ export class MapContainer extends Component {
         address: "1711 N Van Ness Ave Hollywood, CA 90028",
         email: "",
         phone: "323-464-8455",
-        hoursOfOperation: "T: 10:00AM – 3:00PM",
+        hoursOfOperation: ["T: 10:00AM – 3:00PM"],
         walkInsAllowed: "",
         eligibilityRequirements: "",
         populationNotes: "",
@@ -128,7 +128,7 @@ export class MapContainer extends Component {
         address: "6682 Selma Ave Hollywood, CA 90028",
         email: "",
         phone: "",
-        hoursOfOperation: "F: 2:00PM – 5:00PM",
+        hoursOfOperation: ["F: 2:00PM – 5:00PM"],
         walkInsAllowed: "",
         eligibilityRequirements: "",
         populationNotes: "",
@@ -144,7 +144,7 @@ export class MapContainer extends Component {
         address: "1448 N Alvarado St Los Angeles, CA 90026",
         email: "",
         phone: "323-400-8534",
-        hoursOfOperation: "T: 6:00PM - 8:00PM ",
+        hoursOfOperation: ["T: 6:00PM - 8:00PM "],
         walkInsAllowed: "Yes",
         eligibilityRequirements: "",
         populationNotes: "",
@@ -261,6 +261,7 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedResource: {},
       zoom: 15,
+      showFilterBar: false,
       clicked:false
     }
 
@@ -397,7 +398,7 @@ export class MapContainer extends Component {
               }
               <Search searching={this.searching}/>
                
-              <Filter closeBar={this.closeBar} show={this.state.showFilterBar} resource={resource} setFilter={this.setFilter}/>
+              <Filter closeBar={this.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
               {
                   this.state.showingInfoWindow
                   &&
@@ -408,7 +409,7 @@ export class MapContainer extends Component {
                   </InfoWindow>
               }
           </Map>
-          <button onClick={this.openBar}>OPEN</button>
+            {/* <button className="filter-btn"onClick={this.openBar}><img src="/images/Filter.png"/></button> */}
           <Footer className="footer" clicked={this.state.clicked} 
                                     
                                      resource={this.state.filtered.length>0?

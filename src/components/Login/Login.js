@@ -30,9 +30,9 @@ const MainBox = styled.div`
 	}
 	input{
 		border: .01rem solid gray;
-    padding: 1rem 2rem 1rem;
+    padding: 1rem 1rem;
     line-height: .01rem;
-    font-size: 1.2em;
+    font-size: 1.1em;
 	}
 	br{
 		line-height:1px

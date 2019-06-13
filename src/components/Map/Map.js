@@ -12,7 +12,8 @@ export class MapContainer extends Component {
     geo:navigator.geolocation,
     search: '',
     lat: '',
-    lng: ''
+    lng: '',
+    resource: []
     
   }
   
@@ -63,6 +64,35 @@ export class MapContainer extends Component {
             <Map google={this.props.google} zoom={15} initialCenter={ 
               {lat: 34.0480489, lng: -118.24023980000001}
             } center={{lat:lat, lng:lng}} >
+              {
+                resources.map((r,i)=>
+                
+                <Marker key={i}
+                    position={{lat: r.lat, lng: r.lng}}
+                    icon={{
+                        url: "/images/earthResource.png",
+                width: 15, height: 20}  
+                    }}
+                    onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
+                    >
+                </Marker>
+                )
+                }
+                {
+                    this.state.showingInfoWindow
+                    &&
+                    <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+                        <div>
+                            <h3>{this.stringHandler(this.state.selectedResource)}</h3>
+                        </div>
+                    </InfoWindow>
+                    
+                }
+
+
+
+
+
             </Map>
           
           </>

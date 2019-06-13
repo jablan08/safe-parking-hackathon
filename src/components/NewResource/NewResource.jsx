@@ -1,63 +1,94 @@
 import React, {Component} from 'react'
+import Geocode from "react-geocode"
 import styled from "styled-components";
 
-
+const NewForm = styled.form`
+  display: flex;
+  flex-direction: column;
+`
 class NewResource extends Component{
-    state = {
-        
-            resource: "",
-            servicePlanningArea: "",
-            operator: "",
-            website: "",
-            address: "",
-            email: "",
-            phone: "",
-            hoursOfOperation: {
-              m: "",
-              t: "",
-              w: "",
-              th: "",
-              f: "",
-              sat: "",
-              sun: ""
-            },
-            walkInsAllowed: false,
-            eligibilityRequirements: "",
-            populationNotes: "",
-            notes: "",
-    
+
+  state = {
+
       
-    }
-    handleChange = (e) =>
-			this.setState({
-					[e.target.name]: e.target.value
-	})
-
-
-    handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        try {
-                const newResource = await fetch("/resources/new", {
-                        method: "POST",
-                        credentials: "include",
-                        body: JSON.stringify(this.state),
-                        headers: {
-                                "Content-Type": "application/json"
-                        }
-                })
-                const parsedResponse = await newResource.json();
-                console.log(parsedResponse)
-        } catch (error) {
-                console.log(error)
+    resource: "",
+    servicePlanningArea: "",
+    operator: "",
+    website: "",
+    address: "",
+    email: "",
+    phone: "",
+    hoursOfOperation: {
+      m: "",
+      t: "",
+      w: "",
+      th: "",
+      f: "",
+      sat: "",
+      sun: ""
+    },
+    walkInsAllowed: false,
+    eligibilityRequirements: "",
+    populationNotes: "",
+    notes: "",
+    lat: null,
+    lng: null
+  
+    
+  }
+  
+  makeResource = async () => {
+    try {
+      const newResource = await fetch("/resources/new", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(this.state),
+        headers: {
+                "Content-Type": "application/json"
         }
-}
+      })
+      const parsedResponse = await newResource.json();
+      console.log(parsedResponse)
+
+    } catch (error) {
+            console.log(error)
+    }
+  }
+
+
+
+
+
+
+  handleChange = (e) =>
+    this.setState({
+        [e.target.name]: e.target.value
+  })
+  setSearch = (address) => {
+    Geocode.fromAddress(address).then(
+      response => {
+        const { lat, lng } = response.results[0].geometry.location;
+        this.setState({
+          lat:lat,
+          lng:lng
+        })
+        this.makeResource()
+      },
+      error => {
+        console.error(error);
+      });
+    }
+  
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    this.setSearch(this.state.address)
+  }
 
   render(){
       
       return(
           
-          <form onSubmit={this.handleSubmit}> 
+          <NewForm onSubmit={(e)=>this.handleSubmit(e)}> 
             <label className="label-tag" htmlFor="resource">Resource:</label>
             <input type='text' name="resource"
               onChange={this.handleChange} autoComplete="off"/><br/>
@@ -114,9 +145,9 @@ class NewResource extends Component{
             <input type='text' name="notes"
               onChange={this.handleChange} autoComplete="off"/><br/>  
               
-              <button type="submit" className="button-submit"> Submit </button> <br/>
+            <button type="submit" className="button-submit"> Add </button> <br/>
               
-          </form>
+          </NewForm>
       )
 
   }

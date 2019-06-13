@@ -234,38 +234,40 @@ export class MapContainer extends Component {
         lat: 33.7679965,
         lng: -118.2834131
     },
-  ],
-    filtered: [],
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedResource: {},
-    zoom: 15
-    
-  }
-  
-  success(position){
-    //Ethan is a wizard
-    let crd=position.coords
-    this.setState({
-      center:{lat:crd.latitude,
-        lng:crd.longitude}
-      })
+    ],
+      filtered: [],
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedResource: {},
+      zoom: 15
+      
     }
+
     
-  setSearch = (states) => {
-    Geocode.fromAddress(states).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        this.setState({
-          lat:lat,
-          lng:lng
+    success(position){
+      //Ethan is a wizard
+      let crd=position.coords
+      this.setState({
+        center:{lat:crd.latitude,
+          lng:crd.longitude}
         })
-      },
-      error => {
-        console.error(error);
       }
-      );
-    }
+
+      
+    setSearch = (states) => {
+      Geocode.fromAddress(states).then(
+        response => {
+          const { lat, lng } = response.results[0].geometry.location;
+          this.setState({
+            lat:lat,
+            lng:lng
+          })
+        },
+        error => {
+          console.error(error);
+        }
+        );
+      }
     handleClick = (props, marker, e, i) => {
       const { resource } = this.state
       this.setState({
@@ -288,59 +290,55 @@ export class MapContainer extends Component {
       })
       this.setSearch(theSearch)
     } 
-      render() {
-        
-        const { center, lat, lng, resource, zoom } = this.state
-        return (
-          <MainContainer>
-            <Map  
-              google={this.props.google} 
-              className="map"
-              zoom={zoom} 
-              initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
-              center={center.lat ? center : {lat:lat, lng:lng}} >
+    render() {
+      const { center, lat, lng, resource, zoom } = this.state
+      return (
+        <MainContainer>
+          <Map  
+            google={this.props.google} 
+            className="map"
+            zoom={zoom} 
+            initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
+            center={center.lat ? center : {lat:lat, lng:lng}} >
+            {
+              resource.map((r,i)=>
+              
+              <Marker key={i}
+                  position={{lat: r.lat, lng: r.lng}}
+                  icon={{
+                      url: 
+                      
+                        r.resource === "Meals"
+                        ? "/images/foodPointer.png"
+                        : r.resource === "Free groceries"
+                          ? "/images/groceriesPointer.png"
+                          : r.resource === "Mental Health"
+                            ? "/images/mentalHealthPointer.png"
+                            : r.resource === "Substance Abuse"
+                              ? "/images/hospitalPointer.jpg"
+                              : r.resource === "SPLA Parking"
+                                && "/images/parkingPointer.png",
+                      width: 15, height: 20
+                    }  
+                }
+                  onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
+                  >
+              </Marker>
+              )
+              }
+              <Search searching={this.searching}/>
               {
-                resource.map((r,i)=>
-                
-                <Marker key={i}
-                    position={{lat: r.lat, lng: r.lng}}
-                    icon={{
-                        url: 
-                        
-                          r.resource === "Meals"
-                          ? "/images/foodPointer.png"
-                          : r.resource === "Free groceries"
-                            ? "/images/groceriesPointer.png"
-                            : r.resource === "Mental Health"
-                              ? "/images/mentalHealthPointer.png"
-                              : r.resource === "Substance Abuse"
-                                ? "/images/hospitalPointer.jpg"
-                                : r.resource === "SPLA Parking"
-                                  && "/images/parkingPointer.png",
-                        width: 15, height: 20
-                      }  
-                  }
-                    onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
-                    >
-                </Marker>
-                )
-                }
-                <Search searching={this.searching}/>
-                {
-                    this.state.showingInfoWindow
-                    &&
-                    <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-                        <div>
-                            <h3>{this.state.selectedResource.operator}</h3>
-                        </div>
-                    </InfoWindow>
-                    
-                }
+                  this.state.showingInfoWindow
+                  &&
+                  <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+                      <div>
+                          <h3>{this.state.selectedResource.operator}</h3>
+                      </div>
+                  </InfoWindow>
+              }
+          </Map>
+        </MainContainer>
 
-            </Map>
-          
-          </MainContainer>
-  
   )
 }
 }

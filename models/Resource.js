@@ -13,6 +13,8 @@ const ResourceSchema = new mongoose.Schema({
     eligibilityRequirements: String,
     populationNotes: String,
     notes: String,
+    lat: Number,
+    lng: Number
 })
 
 const Resource = mongoose.model("Resource", ResourceSchema);

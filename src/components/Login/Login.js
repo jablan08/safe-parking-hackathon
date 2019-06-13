@@ -24,7 +24,7 @@ const MainBox = styled.div`
     background-color: rgb(152,201,228);
     border-color: rgb(94,172,215);
     border-width: 0.04rem;
-    font-size: .7em;
+    font-size: 1.45em;
     border-radius: .3rem;
 		
 	}

@@ -13,7 +13,200 @@ export class MapContainer extends Component {
     search: '',
     lat: '',
     lng: '',
-    resource: []
+    resource: [
+      {
+        resource: "Free groceries",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "First Church of the Nazarene",
+        website: "",
+        address: "3401 W 3rd St Los Angeles",
+        email: "",
+        phone: "213-276-4600",
+        hoursOfOperation: "",
+        walkInsAllowed: "No",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "Line begins at 8am/First come first serve.",
+        lat: 34.0695168,
+        lng: -118.2899987
+    },
+      {
+        resource: "Meals",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "Downtown Womens Center",
+        website: "https://www.downtownwomenscenter.org",
+        address: "442 S San Pedro St Los Angeles, CA 90011",
+        email: "",
+        phone: "213-680-0600",
+        hoursOfOperation: [
+          "M: 8:00AM - 9:00AM, 12:00PM - 1:00PM", 
+          "T: 8:00AM - 9:00AM, 12:00PM - 1:00PM", 
+          "W: 8:00AM - 9:00AM, 12:00PM - 1:00PM", 
+          "TH: 8:00AM - 9:00AM, 12:00PM - 1:00PM", 
+          "F: 8:00AM - 9:00AM, 12:00PM - 1:00PM", 
+          "SAT: 8:00AM - 9:00AM, 12:00PM - 1:00PM", 
+          "S: 8:00AM - 9:00AM, 12:00PM - 1:00PM", 
+        ],
+        walkInsAllowed: "Yes",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: 34.0074794,
+        lng: -118.2696364
+    },
+      {
+        resource: "Meals",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "Good Shepard",
+        website: "",
+        address: "267 Belmont Ave Los Angeles, CA 90026",
+        email: "",
+        phone: "213-250-5251",
+        hoursOfOperation: [
+          "T: 9:45AM - 2:00PM",
+          "W: 9:45AM - 2:00PM ",
+          "TH: 9:45AM - 2:00PM"
+        ],
+        walkInsAllowed: "",
+        eligibilityRequirements: "Women Only",
+        populationNotes: "",
+        notes: "Located at Languille Shelter. Showers, breakfast and lunch, clothing, bus tokens and referrals are offered as well.",
+        lat: 34.0662224,
+        lng: -118.2632734
+    },
+      {
+        resource: "Meals",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "Silverlake Church",
+        website: "",
+        address: "2930 Hyperion Ave Los Angeles, CA 90027",
+        email: "",
+        phone: "323-663-3151",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: 34.1098169,
+        lng: -118.2707087
+    },
+      {
+        resource: "",
+        servicePlanningArea: "",
+        operator: "",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: ,
+        lng:
+    },
+      {
+        resource: "",
+        servicePlanningArea: "",
+        operator: "",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: ,
+        lng:
+    },
+      {
+        resource: "",
+        servicePlanningArea: "",
+        operator: "",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: ,
+        lng:
+    },
+      {
+        resource: "",
+        servicePlanningArea: "",
+        operator: "",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: ,
+        lng:
+    },
+      {
+        resource: "",
+        servicePlanningArea: "",
+        operator: "",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: ,
+        lng:
+    },
+      {
+        resource: "",
+        servicePlanningArea: "",
+        operator: "",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: ,
+        lng:
+    },
+      {
+        resource: "",
+        servicePlanningArea: "",
+        operator: "",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: ,
+        lng:
+    }
+  ],
+    filtered: [],
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedQuake: {}
     
   }
   
@@ -71,8 +264,8 @@ export class MapContainer extends Component {
                     position={{lat: r.lat, lng: r.lng}}
                     icon={{
                         url: "/images/earthResource.png",
-                width: 15, height: 20}  
-                    }}
+                        width: 15, height: 20}  
+                  }
                     onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
                     >
                 </Marker>

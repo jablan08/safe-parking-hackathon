@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import Search from "../Search/Search"
 import Geocode from "react-geocode"
+import styled from "styled-components";
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
 
+
+const MainContainer = styled.div`
+  .map {
+    width: 100%;
+    height:100%;
+    z-index: -1;
+  }
+`
 Geocode.setApiKey('AIzaSyBbcC3bMFjuryUo-PkKcNze8g_kD-TuSm4');
 Geocode.enableDebug();
 
@@ -263,13 +272,13 @@ export class MapContainer extends Component {
         
         const { center, lat, lng, resource } = this.state
         return (
-          <>
-            <Search searching={this.searching}/>
-            <Map 
+          <MainContainer>
+            <Map  
               google={this.props.google} 
+              className="map"
               zoom={15} 
               initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
-              center={center.lat ? center : {lat:lat, lng:lng}} style={{width: '100%', height: '100%'}} >
+              center={center.lat ? center : {lat:lat, lng:lng}} >
               {
                 resource.map((r,i)=>
                 
@@ -284,6 +293,7 @@ export class MapContainer extends Component {
                 </Marker>
                 )
                 }
+                <Search searching={this.searching}/>
                 {
                     this.state.showingInfoWindow
                     &&
@@ -297,7 +307,7 @@ export class MapContainer extends Component {
 
             </Map>
           
-          </>
+          </MainContainer>
   
   )
 }

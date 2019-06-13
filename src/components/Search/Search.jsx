@@ -56,7 +56,7 @@ class Search extends Component{
       const { search } = this.state
       return(
           <SearchBar onSubmit={(e)=>this.handleSubmit(e)}>
-                <input className="input-box" type='text' size="35" name="search" placeholder="Please enter your location" 
+                <input className="input-box" type='text' size="25" name="search" placeholder="Please enter your location" 
                 value={search} onChange={(e)=>this.handleChange(e)} autoComplete="off"/>
                 <button className="form-btn"type="submit"> Search <br/> <FontAwesomeIcon icon={faSearchLocation}/></button>
           </SearchBar>

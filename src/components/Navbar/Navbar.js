@@ -18,6 +18,9 @@ const MainContainer = styled(MDBContainer)`
   .navButton {
     margin-left: .3rem;
   }
+  .more-navbar {
+    padding: .5rem 0rem;
+  }
 `
 
 class Navbar extends Component {
@@ -33,16 +36,17 @@ toggleCollapse = collapseID => () => {
 render() {
   return (
     <MainContainer>
-      <MDBNavbar color="light-blue lighten-4" style={{ marginTop: '20px', 'opacity': .73 }} light>
+      <MDBNavbar className="more-navbar" color="light-blue lighten-4" style={{ marginTop: '20px', 'opacity': .73 }} light>
         <MDBContainer>
           <MDBNavbarBrand >
-            <img className="img-logo" src="/images/Logo.png" alt=""/>
+            <MDBNavLink to={routes.ROOT} onClick={this.toggleCollapse('navbarCollapse1')}><img className="img-logo" src="/images/Logo.png" alt=""/></MDBNavLink>
+            
           </MDBNavbarBrand>
           <div className="nav-btns">
             {
               this.props.currentUser.splaId
               &&
-              <MDBNavLink to={routes.POST} ><img src="/images/AddResourceButton.png" alt=""/></MDBNavLink>
+              <MDBNavLink className="add-resource"to={routes.POST} ><img src="/images/AddResourceButton.png" alt=""/></MDBNavLink>
             }
             <button className="filter-btn" onClick={this.props.switchBar}><img src="/images/Filter.png" alt=""/></button>
             <MDBNavbarToggler onClick={this.toggleCollapse('navbarCollapse1')} />
@@ -50,7 +54,7 @@ render() {
           <MDBCollapse id="navbarCollapse1" isOpen={this.state.collapseID} navbar>
             <NavbarNav left>
               <MDBNavItem>
-                <MDBNavLink to={routes.ROOT} onClick={this.toggleCollapse('navbarCollapse1')}>Home</MDBNavLink>
+                
               </MDBNavItem>
               
               { 

@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 
+import styled from "styled-components";
 
+const SearchBar = styled.div`
 
+`
 // PASS IT A METHOD THAT TAKES VALUE AND DOES SOMETHING WITH IT IN PARENT COMPONENT
 class Search extends Component{
     state = {
@@ -25,13 +28,13 @@ class Search extends Component{
   render(){
       const { search } = this.state
       return(
-          <div>
+          <SearchBar>
             <form onSubmit={(e)=>this.handleSubmit(e)}> 
-                <input type='text' name="search" placeholder="search" 
+                <input type='text' name="search" placeholder="Enter SPLA ID" 
                 value={search} onChange={(e)=>this.handleChange(e)} autoComplete="off" style={{height:"200px"}}/>
                 <button type="submit"> Submit</button>
             </form>
-          </div>
+          </SearchBar>
       )
 
   }

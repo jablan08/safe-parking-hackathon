@@ -301,11 +301,14 @@ export class MapContainer extends Component {
       this.setState({
         showFilterBar: true
       })
+      
     }
-    closeBar = ()=>{
+    closeBar = async()=>{
+      
       this.setState({
         showFilterBar: false
       })
+      
     }  
 
       
@@ -418,7 +421,7 @@ export class MapContainer extends Component {
               }
               <Search searching={this.searching}/>
                
-              <Filter closeBar={this.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
+              <Filter closeBar={this.props.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
               {
                   this.state.showingInfoWindow
                   &&

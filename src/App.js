@@ -57,9 +57,9 @@ class App extends Component {
     const { currentUser, showFilterBar } = this.state 
     return ( 
       <div>
-         <Navbar className="navbar" showFilterBar={showFilterBar}/>
+         <Navbar className="navbar" showFilterBar={showFilterBar} openBar={this.openBar}/>
          <Switch>
-          <Route exact path={routes.ROOT} render={()=>  <Map /> }/> 
+          <Route exact path={routes.ROOT} render={()=>  <Map showFilterBar={showFilterBar}/> }/> 
           <Route exact path={routes.REGISTER} render={() => <Register currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.LOGIN} render={()=> <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.POST} render={()=> <NewResource currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />

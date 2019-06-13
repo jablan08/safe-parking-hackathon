@@ -20,6 +20,7 @@ const SideBar = styled.div`
     height: 100%;
     width: 50vw;
     position: fixed;
+    margin-top: 5rem;
     top: 0;
     right: 0;
     background-color: rgb(250,250,250);

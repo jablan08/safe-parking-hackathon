@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer } from 'mdbreact';
 import * as routes from '../../constants/routes'
+import Filter from "../Filter/Filter"
 import styled from "styled-components";
 
 const MainContainer = styled(MDBContainer)`
   position:absolute;
+  .filter-btn {
+    z-index: 1;
+    border: none;
+    background: none;
+}
 `
 
 class Navbar extends Component {
@@ -24,7 +30,11 @@ render() {
           <MDBNavbarBrand>
             <img className="img-logo" src="/images/Logo.png"/>
           </MDBNavbarBrand>
-          <MDBNavbarToggler onClick={this.toggleCollapse('navbarCollapse1')} />
+          <div className="nav-btns">
+
+            <button className="filter-btn"onClick={this.props.openBar}><img src="/images/Filter.png"/></button>
+            <MDBNavbarToggler onClick={this.toggleCollapse('navbarCollapse1')} />
+          </div>
           <MDBCollapse id="navbarCollapse1" isOpen={this.state.collapseID} navbar>
             <NavbarNav left>
               <MDBNavItem active>

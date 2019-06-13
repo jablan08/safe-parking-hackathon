@@ -385,7 +385,7 @@ export class MapContainer extends Component {
                               ? "/images/hospitalPointer.jpg"
                               : r.resource === "SPLA Parking"
                                 ? "/images/parkingPointer.png"
-                                : "",
+                                : "/images/defaultPointer.png",
                       width: 15, height: 20
                     }  
                 }

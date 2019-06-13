@@ -15,7 +15,7 @@ const MainContainer = styled.div`
   }
   .footer{
     
-    color:red
+    
  }
   
 `
@@ -263,7 +263,6 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedResource: {},
       zoom: 15,
-      showFilterBar: false,
       clicked:false
     }
 
@@ -316,7 +315,7 @@ export class MapContainer extends Component {
           activeMarker: marker,
           selectedResource: this.state.resource[i],
           center: {lat: resource[i].lat, lng: resource[i].lng},
-          zoom: 18,
+          
           clicked:true
       })
     }
@@ -338,6 +337,9 @@ export class MapContainer extends Component {
       return (
         <MainContainer>
           <Map  
+            streetViewControl={false}
+            mapTypeControl={false}
+            fullscreenControl={false}
             google={this.props.google} 
             className="map"
             zoom={zoom} 
@@ -400,7 +402,7 @@ export class MapContainer extends Component {
               }
               <Search searching={this.searching}/>
                
-              <Filter closeBar={this.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
+              <Filter closeBar={this.closeBar} show={this.state.showFilterBar} resource={resource} setFilter={this.setFilter}/>
               {
                   this.state.showingInfoWindow
                   &&
@@ -411,11 +413,10 @@ export class MapContainer extends Component {
                   </InfoWindow>
               }
           </Map>
-            {/* <button className="filter-btn"onClick={this.openBar}><img src="/images/Filter.png"/></button> */}
+          <button onClick={this.openBar}>OPEN</button>
           <Footer className="footer" clicked={this.state.clicked} 
-                                      
                                      resource={this.state.filtered.length>0?
-                                      this.state.filtered:this.state.resource} 
+                                     this.state.filtered : this.state.resource} 
                                      selected={this.state.selectedResource}/>
         </MainContainer>
 

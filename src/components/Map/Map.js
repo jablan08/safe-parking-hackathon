@@ -261,6 +261,7 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedResource: {},
       zoom: 15,
+      showFilterBar: false,
       clicked:false
     }
 
@@ -397,7 +398,7 @@ export class MapContainer extends Component {
               }
               <Search searching={this.searching}/>
                
-              <Filter closeBar={this.closeBar} show={this.state.showFilterBar} resource={resource} setFilter={this.setFilter}/>
+              <Filter closeBar={this.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
               {
                   this.state.showingInfoWindow
                   &&
@@ -408,7 +409,7 @@ export class MapContainer extends Component {
                   </InfoWindow>
               }
           </Map>
-          <button onClick={this.openBar}>OPEN</button>
+            {/* <button className="filter-btn"onClick={this.openBar}><img src="/images/Filter.png"/></button> */}
           <Footer className="footer" clicked={this.state.clicked} 
                                     
                                      resource={this.state.filtered.length>0?

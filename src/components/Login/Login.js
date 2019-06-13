@@ -1,5 +1,7 @@
 
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
+import * as routes from "../../constants/routes";
 import styled from "styled-components";
 
 
@@ -89,26 +91,31 @@ class Login extends Component {
 			const { splaId, password, message } = this.state
 			return ( 
 					<>
-							<LoginContainer>
-									<MainBox>
-											<div className="sub-log-box">
-													<div>
-															<h1 className="sign-box">
-																Log In
-															</h1>
-													</div>
-													<div className="login-box">
-															<form onSubmit={e => this.handleSubmit(e)}>
-																			<input className="input-box" type="text" name="splaId" placeholder="Enter SPLA ID" onChange={this.handleChange} value={splaId}/><br/>
-																			
-																			<input className="input-box" type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>
-																			<button type="submit" className="button-submit"> LOG IN </button> <br/>
-																			<h6>{message} </h6> <br/>
-															</form>
-													</div>
-											</div>
-									</MainBox>
-							</LoginContainer>
+					{
+						this.props.currentUser.splaId
+						? <Redirect to={routes.ROOT}/>
+						:
+						<LoginContainer>
+								<MainBox>
+										<div className="sub-log-box">
+												<div>
+														<h1 className="sign-box">
+															Log In
+														</h1>
+												</div>
+												<div className="login-box">
+														<form onSubmit={e => this.handleSubmit(e)}>
+																		<input className="input-box" type="text" name="splaId" placeholder="Enter SPLA ID" onChange={this.handleChange} value={splaId}/><br/>
+																		
+																		<input className="input-box" type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>
+																		<button type="submit" className="button-submit"> LOG IN </button> <br/>
+																		<h6>{message} </h6> <br/>
+														</form>
+												</div>
+										</div>
+								</MainBox>
+						</LoginContainer>
+					}
 					</>
 				);
 	}

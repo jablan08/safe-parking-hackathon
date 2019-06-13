@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer } from 'mdbreact';
+import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer, MDBBtn, MD } from 'mdbreact';
 import * as routes from '../../constants/routes'
 import Filter from "../Filter/Filter"
 import styled from "styled-components";
@@ -15,6 +15,9 @@ const MainContainer = styled(MDBContainer)`
   }
   .nav-btns {
     display: flex;
+  }
+  .navButton {
+    margin-left: .3rem;
   }
 `
 
@@ -52,14 +55,16 @@ render() {
               </MDBNavItem>
               
               { 
-                !this.state.currentUser &&
-              <MDBNavItem>
-                <MDBNavLink to={routes.LOGIN} onClick={this.toggleCollapse('navbarCollapse1')}>Login</MDBNavLink>
-              </MDBNavItem>
+                this.props.currentUser.splaId
+                ? <MDBNavItem onClick={()=>this.props.doLogout()} className="navButton" >Logout</MDBNavItem>
+                :
+                <MDBNavItem>
+                  <MDBNavLink to={routes.LOGIN} onClick={this.toggleCollapse('navbarCollapse1')}>Login</MDBNavLink>
+                </MDBNavItem>
               }
-              <MDBNavItem>
+              {/* <MDBNavItem>
                 <MDBNavLink to={routes.REGISTER} onClick={this.toggleCollapse('navbarCollapse1')}>Register</MDBNavLink>
-              </MDBNavItem>
+              </MDBNavItem> */}
             </NavbarNav>
           </MDBCollapse>
         </MDBContainer>

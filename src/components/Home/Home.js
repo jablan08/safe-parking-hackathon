@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 class Home extends Component {
-
-    state = {
+     state = {
         resources: []
     }
-    componentdidMount() {
+    componentDidMount() {
 
     }
     render() {
@@ -17,3 +16,5 @@ class Home extends Component {
         )
     }
 }
+
+export default Home

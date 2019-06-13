@@ -46,7 +46,7 @@ class App extends Component {
     const { currentUser } = this.state 
     return ( 
       <div>
-         <Navbar className="navbar" />
+         <Navbar className="navbar" currentUser={currentUser} />
          <Switch>
           <Route exact path={routes.ROOT} render={()=>  <Map /> }/> 
           <Route exact path={routes.REGISTER} render={() => <Register currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />

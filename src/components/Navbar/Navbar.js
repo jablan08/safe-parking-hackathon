@@ -3,7 +3,8 @@ import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbar
 import * as routes from '../../constants/routes'
 class Navbar extends Component {
 state = {
-  collapseID: ''
+  collapseID: '',
+  currentUser: false
 }
 
 toggleCollapse = collapseID => () => {
@@ -27,9 +28,13 @@ render() {
               <MDBNavItem>
                 <MDBNavLink to={routes.POST}>Post</MDBNavLink>
               </MDBNavItem>
+              { 
+                !this.state.currentUser &&
               <MDBNavItem>
                 <MDBNavLink to={routes.LOGIN}>Login</MDBNavLink>
               </MDBNavItem>
+
+              }
               <MDBNavItem>
                 <MDBNavLink to={routes.REGISTER}>Register</MDBNavLink>
               </MDBNavItem>

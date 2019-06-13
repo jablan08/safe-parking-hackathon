@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Switch, Route, withRouter } from "react-router-dom";
 import Login from "./components/Login/Login";
-// import Home from "./components/Home/Home";
+import NewResource from "./components/NewResource/NewResource"
 import Register from "./components/Register/Register";
-// import NavBar from "./components/Navbar/NavBar";
+
 
 import * as routes from "./constants/routes";
 
@@ -50,6 +50,7 @@ class App extends Component {
           <Route exact path={routes.ROOT} render={()=>  <Map /> }/> 
           <Route exact path={routes.REGISTER} render={() => <Register currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.LOGIN} render={()=> <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
+          <Route exact path={routes.POST} render={()=> <NewResource currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route render={()=> <div>You're LOST</div>}/>
         </Switch>
        

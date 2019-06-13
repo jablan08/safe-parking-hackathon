@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearchLocation } from '@fortawesome/free-solid-svg-icons';
 import styled from "styled-components";
 
 const SearchBar = styled.form`
@@ -23,11 +24,12 @@ const SearchBar = styled.form`
         cursor: text;
         box-sizing: border-box;
         border-radius: .5rem;
-        margin: 1rem 0 2rem 0;
         z-index: 1;
     }
     .form-btn {
         z-index: 1;
+        border: none;
+        background: none;
     }
 `
 // PASS IT A METHOD THAT TAKES VALUE AND DOES SOMETHING WITH IT IN PARENT COMPONENT
@@ -56,7 +58,7 @@ class Search extends Component{
           <SearchBar onSubmit={(e)=>this.handleSubmit(e)}>
                 <input className="input-box" type='text' size="35" name="search" placeholder="Please enter your location" 
                 value={search} onChange={(e)=>this.handleChange(e)} autoComplete="off"/>
-                <button className="form-btn"type="submit"> Submit</button>
+                <button className="form-btn"type="submit"> Search <br/> <FontAwesomeIcon icon={faSearchLocation}/></button>
           </SearchBar>
       )
 

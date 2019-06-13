@@ -213,7 +213,7 @@ export class MapContainer extends Component {
     filtered: [],
     showingInfoWindow: false,
     activeMarker: {},
-    selectedQuake: {}
+    selectedResource: {}
     
   }
   
@@ -230,7 +230,6 @@ export class MapContainer extends Component {
     Geocode.fromAddress(states).then(
       response => {
         const { lat, lng } = response.results[0].geometry.location;
-        console.log(lat, lng,"hitbthihtithith");
         this.setState({
           lat:lat,
           lng:lng
@@ -241,6 +240,13 @@ export class MapContainer extends Component {
       }
       );
     }
+    handleClick = (props, marker, e, i) => {
+      this.setState({
+          showingInfoWindow: true,
+          activeMarker: marker,
+          selectedResource: this.state.resource[i]
+      })
+    }
     componentDidMount(){
       this.state.geo.getCurrentPosition(
         (position) => this.success(position)
@@ -248,29 +254,27 @@ export class MapContainer extends Component {
       }
     searching = (theSearch) => {
       this.setState({
-        search: theSearch
+        search: theSearch,
+        center: {}
       })
       this.setSearch(theSearch)
     } 
       render() {
         
         const { center, lat, lng, resource } = this.state
-        console.log(center.lat)
-        console.log(center.lng)
-        console.log(this.state, "hittt")
         return (
           <>
             <Search searching={this.searching}/>
             <Map google={this.props.google} zoom={15} initialCenter={ 
               {lat: 34.0559993, lng: -118.2537683}
-            } center={{lat:lat, lng:lng}} >
+            } center={center.lat ? center : {lat:lat, lng:lng}} >
               {
                 resource.map((r,i)=>
                 
                 <Marker key={i}
                     position={{lat: r.lat, lng: r.lng}}
                     icon={{
-                        url: "/images/earthResource.png",
+                        url: "/images/foodPointer.png",
                         width: 15, height: 20}  
                   }
                     onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
@@ -283,15 +287,11 @@ export class MapContainer extends Component {
                     &&
                     <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
                         <div>
-                            <h3>{this.stringHandler(this.state.selectedResource)}</h3>
+                            <h3>{this.state.selectedResource.operator}</h3>
                         </div>
                     </InfoWindow>
                     
                 }
-
-
-
-
 
             </Map>
           

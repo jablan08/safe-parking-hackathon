@@ -334,6 +334,7 @@ export class MapContainer extends Component {
       const { center, lat, lng, resource, zoom, filtered } = this.state
       console.log(this.state.filtered)
       return (
+        <>
         <MainContainer>
           <Map  
             google={this.props.google} 
@@ -408,14 +409,23 @@ export class MapContainer extends Component {
                       </div>
                   </InfoWindow>
               }
+              <Footer 
+                className="footer" 
+                clicked={this.state.clicked} 
+                resource=
+                { 
+                  this.state.filtered.length > 0
+                  ?
+                  this.state.filtered
+                  :
+                  this.state.resource
+                } 
+              selected={this.state.selectedResource}/>
           </Map>
             {/* <button className="filter-btn"onClick={this.openBar}><img src="/images/Filter.png"/></button> */}
-          <Footer className="footer" clicked={this.state.clicked} 
-                                    
-                                     resource={this.state.filtered.length>0?
-                                      this.state.filtered:this.state.resource} 
-                                     selected={this.state.selectedResource}/>
         </MainContainer>
+        </>
+                   
 
   )
 }

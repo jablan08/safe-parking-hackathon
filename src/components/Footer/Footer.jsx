@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 import ResourceList from '../ResourceList/ResourceList'
 import ExpandedResource from '../ExpandedResource/ExpandedResource'
+import styled from 'styled-components'
+
+const FootContainer = styled.div`
+	    display: flex;
+    /* margin-top: 100%; */
+    position: absolute;
+    bottom: 0;
+    flex-direction: column;
+
+`
+
+
 class Footer extends Component {
 	state = {
         
@@ -17,15 +29,20 @@ class Footer extends Component {
 
 	render() {
 		
-			return (
-			<div>
-                {this.props.clicked ?
-                <div><ExpandedResource selected={this.props.selected}/></div>
-            :
-            <div><ResourceList resources={this.props.resource}/></div>
-            }
+		return (
+			<FootContainer>
+				<div>
+					
+					{
+						this.props.clicked
+						 ?
+						<ExpandedResource selected={this.props.selected}/>
+						:
+						<ResourceList resources={this.props.resource}/>
+					}
+				</div>
 
-            </div>
+            </FootContainer>
 		)
 	}
 }

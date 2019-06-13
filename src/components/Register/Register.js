@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Register extends Component {
 	state = {
 			name: "",
-			email: "",
+			splaId: "",
 			password: "",
 			logged: false,
 
@@ -41,7 +41,7 @@ class Register extends Component {
 	}
 
 	render() {
-		const { name, password, email} = this.state
+		const { name, password, splaId} = this.state
 			return (
 					<div>
 							<form onSubmit={e => this.handleSubmit(e)}>
@@ -49,8 +49,8 @@ class Register extends Component {
 								<input className="input-box" type="text" name="name" onChange={this.handleChange} value={name}/>
 								<label className="label-tag" htmlFor="password">Password</label>
 								<input className="input-box" type="password" name="password" onChange={this.handleChange}value={password} autoComplete="off"/>
-								<label className="label-tag" htmlFor="email">Email</label>
-								<input className="input-box" type="email" name="email" onChange={this.handleChange} value={email}/>
+								<label className="label-tag" htmlFor="splaId">SPLA ID</label>
+								<input className="input-box" type="splaId" name="splaId" onChange={this.handleChange} value={splaId}/>
 								<button type="submit"> Submit</button>
 							</form>
 				</div>

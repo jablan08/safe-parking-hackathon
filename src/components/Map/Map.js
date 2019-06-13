@@ -408,7 +408,9 @@ export class MapContainer extends Component {
                   &&
                   <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
                       <div>
-                          <h3>{this.state.selectedResource.operator}</h3>
+                          <h3>{this.state.selectedResource.operator}</h3><br/>
+                          {this.state.selectedResource.resource}
+                          {this.state.selectedResource.phone}
                       </div>
                   </InfoWindow>
               }

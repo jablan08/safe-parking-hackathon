@@ -59,7 +59,8 @@ class NewResource extends Component{
     populationNotes: "",
     notes: "",
     lat: null,
-    lng: null
+    lng: null,
+
   
     
   }
@@ -75,7 +76,9 @@ class NewResource extends Component{
         }
       })
       const parsedResponse = await newResource.json();
-      console.log(parsedResponse)
+      this.setState({
+        newResource: parsedResponse.newResource
+      })
 
     } catch (error) {
             console.log(error)
@@ -114,7 +117,7 @@ class NewResource extends Component{
   render(){
       
       return(
-          
+      
           <NewForm onSubmit={(e)=>this.handleSubmit(e)}>
             <div className="top-form">
 

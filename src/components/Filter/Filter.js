@@ -42,15 +42,14 @@ const SideBar = styled.div`
   h1 {
     
     text-align: center;
-    font-size: 100pt;
   }
   h1, p {
-    color: rgb(17, 103, 155);
+    color: rgb(24, 104, 153);
     margin: .4rem;
   }
   p {
     text-align: left;
-    font-size: 20pt;
+    font-size: 20px;
     font-weight: 600;
   }
   label {

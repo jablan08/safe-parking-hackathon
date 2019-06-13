@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Search from "../Search/Search"
 import Geocode from "react-geocode"
 import styled from "styled-components";
+import Filter from "../Filter/Filter"
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
 
 
@@ -231,41 +232,76 @@ export class MapContainer extends Component {
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "",
-        lat: 33.7679965,
-        lng: -118.2834131
+        lat: 34.0501069,
+        lng: -118.2405926
     },
-  ],
-    filtered: [],
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedResource: {},
-    zoom: 15
+      {
+        resource: "Service Planning Area",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "Service Planning Area",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: 34.0559993,
+        lng: -118.2537683
+    },
+    ],
+      filtered: [],
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedResource: {},
+      zoom: 15
+      
+    }
+
     
-  }
-  
-  success(position){
-    //Ethan is a wizard
-    let crd=position.coords
-    this.setState({
-      center:{lat:crd.latitude,
-        lng:crd.longitude}
+    success(position){
+      //Ethan is a wizard
+      let crd=position.coords
+      this.setState({
+        center:{lat:crd.latitude,
+          lng:crd.longitude}
+        })
+      }
+    
+
+    setFilter = (filteredItems) => {
+      this.setState({
+        filtered: filteredItems
       })
     }
-    
-  setSearch = (states) => {
-    Geocode.fromAddress(states).then(
-      response => {
-        const { lat, lng } = response.results[0].geometry.location;
-        this.setState({
-          lat:lat,
-          lng:lng
-        })
-      },
-      error => {
-        console.error(error);
-      }
-      );
+    openBar = ()=>{
+      this.setState({
+        showFilterBar: true
+      })
     }
+    closeBar = ()=>{
+      this.setState({
+        showFilterBar: false
+      })
+    }  
+
+      
+    setSearch = (states) => {
+      Geocode.fromAddress(states).then(
+        response => {
+          const { lat, lng } = response.results[0].geometry.location;
+          this.setState({
+            lat:lat,
+            lng:lng
+          })
+        },
+        error => {
+          console.error(error);
+        }
+        );
+      }
     handleClick = (props, marker, e, i) => {
       const { resource } = this.state
       this.setState({
@@ -288,59 +324,88 @@ export class MapContainer extends Component {
       })
       this.setSearch(theSearch)
     } 
-      render() {
-        
-        const { center, lat, lng, resource, zoom } = this.state
-        return (
-          <MainContainer>
-            <Map  
-              google={this.props.google} 
-              className="map"
-              zoom={zoom} 
-              initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
-              center={center.lat ? center : {lat:lat, lng:lng}} >
-              {
-                resource.map((r,i)=>
-                
-                <Marker key={i}
-                    position={{lat: r.lat, lng: r.lng}}
-                    icon={{
-                        url: 
-                        
-                          r.resource === "Meals"
-                          ? "/images/foodPointer.png"
-                          : r.resource === "Free groceries"
-                            ? "/images/groceriesPointer.png"
-                            : r.resource === "Mental Health"
-                              ? "/images/mentalHealthPointer.png"
-                              : r.resource === "Substance Abuse"
-                                ? "/images/hospitalPointer.jpg"
-                                : r.resource === "SPLA Parking"
-                                  && "/images/parkingPointer.png",
-                        width: 15, height: 20
-                      }  
-                  }
-                    onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
-                    >
-                </Marker>
-                )
-                }
-                <Search searching={this.searching}/>
-                {
-                    this.state.showingInfoWindow
-                    &&
-                    <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
-                        <div>
-                            <h3>{this.state.selectedResource.operator}</h3>
-                        </div>
-                    </InfoWindow>
-                    
-                }
+    render() {
+      const { center, lat, lng, resource, zoom, filtered } = this.state
+      console.log(this.state.filtered)
+      return (
+        <MainContainer>
+          <Map  
+            google={this.props.google} 
+            className="map"
+            zoom={zoom} 
+            initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
+            center={center.lat ? center : {lat:lat, lng:lng}} >
+            {
+              filtered.length === 0
+              ? 
 
-            </Map>
-          
-          </MainContainer>
-  
+              resource.map((r,i)=>
+              <Marker key={i}
+                  position={{lat: r.lat, lng: r.lng}}
+                  icon={{
+                      url: 
+                      
+                        r.resource === "Meals"
+                        ? "/images/foodPointer.png"
+                        : r.resource === "Free groceries"
+                          ? "/images/groceriesPointer.png"
+                          : r.resource === "Mental Health"
+                            ? "/images/mentalHealthPointer.png"
+                            : r.resource === "Substance Abuse"
+                              ? "/images/hospitalPointer.jpg"
+                              : r.resource === "SPLA Parking"
+                                ? "/images/parkingPointer.png"
+                                : "/images/parkingPointer.png",
+                      width: 15, height: 20
+                    }  
+                }
+                  onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
+                  >
+              </Marker>
+              )
+              :
+              filtered.map((r,i)=>
+              <Marker key={i}
+                  position={{lat: r.lat, lng: r.lng}}
+                  icon={{
+                      url: 
+                      
+                        r.resource === "Meals"
+                        ? "/images/foodPointer.png"
+                        : r.resource === "Free groceries"
+                          ? "/images/groceriesPointer.png"
+                          : r.resource === "Mental Health"
+                            ? "/images/mentalHealthPointer.png"
+                            : r.resource === "Substance Abuse"
+                              ? "/images/hospitalPointer.jpg"
+                              : r.resource === "SPLA Parking"
+                                ? "/images/parkingPointer.png"
+                                : "",
+                      width: 15, height: 20
+                    }  
+                }
+                  onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
+                  >
+              </Marker>
+              )
+
+              }
+              <Search searching={this.searching}/>
+               
+              <Filter closeBar={this.closeBar} show={this.state.showFilterBar} resource={resource} setFilter={this.setFilter}/>
+              {
+                  this.state.showingInfoWindow
+                  &&
+                  <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+                      <div>
+                          <h3>{this.state.selectedResource.operator}</h3>
+                      </div>
+                  </InfoWindow>
+              }
+          </Map>
+          <button onClick={this.openBar}>OPEN</button>
+        </MainContainer>
+
   )
 }
 }

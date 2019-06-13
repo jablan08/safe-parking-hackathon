@@ -3,6 +3,7 @@ import Search from "../Search/Search"
 import Geocode from "react-geocode"
 import styled from "styled-components";
 import Filter from "../Filter/Filter"
+import Footer from "../Footer/Footer"
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
 
 
@@ -11,6 +12,9 @@ const MainContainer = styled.div`
     width: 100%;
     height:100%;
     z-index: -1;
+  }
+  .footer{
+    
   }
 `
 Geocode.setApiKey('AIzaSyBbcC3bMFjuryUo-PkKcNze8g_kD-TuSm4');
@@ -257,8 +261,12 @@ export class MapContainer extends Component {
       activeMarker: {},
       selectedResource: {},
       zoom: 15,
+<<<<<<< HEAD
       showFilterBar: false
       
+=======
+      clicked:false
+>>>>>>> master
     }
 
     
@@ -310,7 +318,8 @@ export class MapContainer extends Component {
           activeMarker: marker,
           selectedResource: this.state.resource[i],
           center: {lat: resource[i].lat, lng: resource[i].lng},
-          zoom: 18
+          zoom: 18,
+          clicked:true
       })
     }
     componentDidMount(){
@@ -405,6 +414,11 @@ export class MapContainer extends Component {
               }
           </Map>
           <button onClick={this.openBar}>OPEN</button>
+          <Footer className="footer" clicked={this.state.clicked} 
+                                    
+                                     resource={this.state.filtered.length>0?
+                                      this.state.filtered:this.state.resource} 
+                                     selected={this.state.selectedResource}/>
         </MainContainer>
 
   )

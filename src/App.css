@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 button:focus {outline:0;}
@@ -21,3 +21,4 @@ button:focus {outline:0;}
 .navbar {
   opacity: .73;
 }
+

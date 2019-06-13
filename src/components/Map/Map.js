@@ -12,9 +12,12 @@ const MainContainer = styled.div`
     height:100%;
     z-index: -1;
   }
-  .footer{
-    
-    
+  .InfoWindow {
+    font-size: 15pt;
+  }
+  .search {
+    font-size: 17pt;
+    color: rgb(142,142,147)
  }
   
 `

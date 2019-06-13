@@ -5,12 +5,17 @@ import Filter from "../Filter/Filter"
 import styled from "styled-components";
 
 const MainContainer = styled(MDBContainer)`
-  /* position:absolute; */
+  position:absolute;
+  width: 100%;
+ /* text-align: center; */
   .filter-btn {
     z-index: 1;
     border: none;
     background: none;
-}
+  }
+  .nav-btns {
+    display: flex;
+  }
 `
 
 class Navbar extends Component {
@@ -32,27 +37,28 @@ render() {
             <img className="img-logo" src="/images/Logo.png"/>
           </MDBNavbarBrand>
           <div className="nav-btns">
-
+            {
+              this.props.currentUser.splaId
+              &&
+              <MDBNavLink to={routes.POST} onClick={this.toggleCollapse('navbarCollapse1')}><img src="/images/AddResourceButton.png"/></MDBNavLink>
+            }
             <button className="filter-btn"onClick={this.props.openBar}><img src="/images/Filter.png"/></button>
             <MDBNavbarToggler onClick={this.toggleCollapse('navbarCollapse1')} />
           </div>
           <MDBCollapse id="navbarCollapse1" isOpen={this.state.collapseID} navbar>
             <NavbarNav left>
-              <MDBNavItem active>
-                <MDBNavLink to={routes.ROOT}>Home</MDBNavLink>
-              </MDBNavItem>
               <MDBNavItem>
-                <MDBNavLink to={routes.POST}>Post</MDBNavLink>
+                <MDBNavLink to={routes.ROOT} onClick={this.toggleCollapse('navbarCollapse1')}>Home</MDBNavLink>
               </MDBNavItem>
+              
               { 
                 !this.state.currentUser &&
               <MDBNavItem>
-                <MDBNavLink to={routes.LOGIN}>Login</MDBNavLink>
+                <MDBNavLink to={routes.LOGIN} onClick={this.toggleCollapse('navbarCollapse1')}>Login</MDBNavLink>
               </MDBNavItem>
-
               }
               <MDBNavItem>
-                <MDBNavLink to={routes.REGISTER}>Register</MDBNavLink>
+                <MDBNavLink to={routes.REGISTER} onClick={this.toggleCollapse('navbarCollapse1')}>Register</MDBNavLink>
               </MDBNavItem>
             </NavbarNav>
           </MDBCollapse>

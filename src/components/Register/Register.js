@@ -74,6 +74,7 @@ class Register extends Component {
 		const { name, password, splaId} = this.state
 			return (
 					<RegisterContainer>
+							
 							<form onSubmit={e => this.handleSubmit(e)}>
 								<label className="label-tag-1" htmlFor="name">Name</label>
 								<input className="input-box" type="text" name="name" onChange={this.handleChange} value={name}/>

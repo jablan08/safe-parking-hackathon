@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Search from "../Search/Search"
 import Geocode from "react-geocode"
-import { GoogleApiWrapper, Map } from 'google-maps-react'
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
 
 Geocode.setApiKey('AIzaSyBbcC3bMFjuryUo-PkKcNze8g_kD-TuSm4');
 Geocode.enableDebug();
@@ -109,7 +109,7 @@ export class MapContainer extends Component {
       {
         resource: "Showers",
         servicePlanningArea: "SPA 4 - Metro LA",
-        operator: "Shower of Hope: Hollywood 1st Baptist Church",
+        operator: "Shower of Hope by Hollywood 1st Baptist Church",
         website: "",
         address: "6682 Selma Ave Hollywood, CA 90028",
         email: "",
@@ -131,7 +131,7 @@ export class MapContainer extends Component {
         email: "",
         phone: "323-400-8534",
         hoursOfOperation: "T: 6:00PM - 8:00PM ",
-        walkInsAllowed: "",
+        walkInsAllowed: "Yes",
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "Only open every 3rd Tuesday of every month.",
@@ -139,69 +139,76 @@ export class MapContainer extends Component {
         lng:-118.2607583
     },
       {
-        resource: "",
+        resource: "Storage",
         servicePlanningArea: "SPA 4 - Metro LA",
-        operator: "",
+        operator: "The BIN",
         website: "",
-        address: "",
+        address: "507 Towne Ave Los Angeles, CA 90013",
         email: "",
-        phone: "",
-        hoursOfOperation: "",
-        walkInsAllowed: "",
+        phone: "213-629-1050",
+        hoursOfOperation: [
+          "M: 8:00AM - 5:00PM",
+          "T: 8:00AM - 5:00PM",
+          "W: 8:00AM - 5:00PM",
+          "TH: 8:00AM - 5:00PM",
+          "F: 8:00AM - 5:00PM",
+          "SAT: 8:00AM - 1:00PM",
+        ],
+        walkInsAllowed: "Yes",
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "",
-        lat: ,
-        lng:
+        lat: 34.0428833,
+        lng: -118.2422388
     },
       {
-        resource: "",
+        resource: "Access Point Center",
         servicePlanningArea: "SPA 4 - Metro LA",
-        operator: "",
-        website: "",
-        address: "",
+        operator: "Exodus Mental Health",
+        website: "https://www.exodusrecovery.com/eastside-marengo-street/",
+        address: "1920 Marengo St Los Angeles, CA 90033",
         email: "",
-        phone: "",
+        phone: "213-276-4600",
         hoursOfOperation: "",
         walkInsAllowed: "",
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "",
-        lat: ,
-        lng:
+        lat: 34.0568868,
+        lng: -118.2082203
     },
       {
-        resource: "",
+        resource: "Substance Abuse",
         servicePlanningArea: "SPA 4 - Metro LA",
-        operator: "",
+        operator: "Rena B. Recovery Center",
         website: "",
-        address: "",
+        address: "4445 Burns Ave, Los Angeles, CA 90029",
         email: "",
-        phone: "",
+        phone: "323-664-8940",
         hoursOfOperation: "",
         walkInsAllowed: "",
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "",
-        lat: ,
-        lng:
+        lat: 34.0878232,
+        lng: -118.2907943
     },
       {
-        resource: "",
-        servicePlanningArea: "",
-        operator: "",
+        resource: "Mental Health",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "Didi Hirsh Metro Center",
         website: "",
-        address: "",
+        address: "672 S La Fayette Park Pl Ste 6, Los Angeles",
         email: "",
-        phone: "",
+        phone: "213-381-3626",
         hoursOfOperation: "",
         walkInsAllowed: "",
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "",
-        lat: ,
-        lng:
-    }
+        lat: 34.0609786,
+        lng: -118.2834131
+    },
   ],
     filtered: [],
     showingInfoWindow: false,
@@ -247,7 +254,7 @@ export class MapContainer extends Component {
     } 
       render() {
         
-        const { center, lat, lng } = this.state
+        const { center, lat, lng, resource } = this.state
         console.log(center.lat)
         console.log(center.lng)
         console.log(this.state, "hittt")
@@ -255,10 +262,10 @@ export class MapContainer extends Component {
           <>
             <Search searching={this.searching}/>
             <Map google={this.props.google} zoom={15} initialCenter={ 
-              {lat: 34.0480489, lng: -118.24023980000001}
+              {lat: 34.0559993, lng: -118.2537683}
             } center={{lat:lat, lng:lng}} >
               {
-                resources.map((r,i)=>
+                resource.map((r,i)=>
                 
                 <Marker key={i}
                     position={{lat: r.lat, lng: r.lng}}

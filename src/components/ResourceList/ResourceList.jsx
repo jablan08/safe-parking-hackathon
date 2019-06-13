@@ -1,24 +1,24 @@
 import React, {Component} from 'react'
+import styled from "styled-components"
 import ResItem from './ResItem'
+
+
+const InsideFooter = styled.div`
+    /* display: flex;
+    flex-direction: column;
+    > ul {
+        list-style: none;
+    } */
+`
 
 class ResourceList extends Component{
     state={
         
     }
     
-  
-
-        
-  
-
-
-    
-
     render(){
-
-        
         return(
-        <div>
+        <InsideFooter>
          
             <ul>
                {
@@ -29,7 +29,7 @@ class ResourceList extends Component{
                }
             
             </ul>
-        </div>
+        </InsideFooter>
 
 )
 }

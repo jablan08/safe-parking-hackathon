@@ -35,6 +35,9 @@ const MainBox = styled.div`
 	br{
 		line-height:1px
 	}
+	.sign-box {
+		margin-top: 10rem;
+	}
 
 	
 `
@@ -101,7 +104,7 @@ class Login extends Component {
 																			<input className="input-box" type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>
 																			<button type="submit" className="button-submit"> LOG IN </button> <br/>
 																			<h6>{message} </h6> <br/>
-																	</form>
+															</form>
 													</div>
 											</div>
 									</MainBox>

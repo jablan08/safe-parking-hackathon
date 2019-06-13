@@ -7,7 +7,7 @@ const SearchBar = styled.form`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 4rem;
+    margin-top: 7.5rem;
     
     > form {
         display: flex;

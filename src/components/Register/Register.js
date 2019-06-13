@@ -1,4 +1,34 @@
 import React, { Component } from 'react'
+import styled from "styled-components";
+
+const RegisterContainer = styled.div`
+	>form {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	}
+	.label-tag-1 {
+		margin-top: 10rem;
+	}
+	button {
+		width: 100%;
+    height: 2rem;
+    background-color: rgb(152,201,228);
+    border-color: rgb(94,172,215);
+    border-width: 0.04rem;
+    font-size: .7em;
+		border-radius: .3rem;
+		margin-top: 1rem;
+		
+	}
+	input{
+		border: .01rem solid gray;
+    padding: 1rem 2rem 1rem;
+    line-height: .01rem;
+		font-size: 1.2em;
+	}
+`
 
 class Register extends Component {
 	state = {
@@ -43,9 +73,9 @@ class Register extends Component {
 	render() {
 		const { name, password, splaId} = this.state
 			return (
-					<div>
+					<RegisterContainer>
 							<form onSubmit={e => this.handleSubmit(e)}>
-								<label className="label-tag" htmlFor="name">Name</label>
+								<label className="label-tag-1" htmlFor="name">Name</label>
 								<input className="input-box" type="text" name="name" onChange={this.handleChange} value={name}/>
 								<label className="label-tag" htmlFor="password">Password</label>
 								<input className="input-box" type="password" name="password" onChange={this.handleChange}value={password} autoComplete="off"/>
@@ -53,7 +83,7 @@ class Register extends Component {
 								<input className="input-box" type="splaId" name="splaId" onChange={this.handleChange} value={splaId}/>
 								<button type="submit"> Submit</button>
 							</form>
-				</div>
+					</RegisterContainer>
 		)
 	}
 }

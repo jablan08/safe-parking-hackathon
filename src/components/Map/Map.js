@@ -15,7 +15,9 @@ const MainContainer = styled.div`
   }
   .footer{
     
-  }
+    color:red
+ }
+  
 `
 Geocode.setApiKey('AIzaSyBbcC3bMFjuryUo-PkKcNze8g_kD-TuSm4');
 Geocode.enableDebug();
@@ -410,7 +412,7 @@ export class MapContainer extends Component {
           </Map>
           <button onClick={this.openBar}>OPEN</button>
           <Footer className="footer" clicked={this.state.clicked} 
-                                    
+                                      
                                      resource={this.state.filtered.length>0?
                                       this.state.filtered:this.state.resource} 
                                      selected={this.state.selectedResource}/>

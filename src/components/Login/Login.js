@@ -32,7 +32,7 @@ const MainBox = styled.div`
 		border: .01rem solid gray;
     padding: 1rem 1rem;
     line-height: .01rem;
-    font-size: 1.1em;
+    font-size: 1.1rem;
 	}
 	br{
 		line-height:1px

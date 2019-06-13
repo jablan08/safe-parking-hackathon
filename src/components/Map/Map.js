@@ -416,8 +416,6 @@ export class MapContainer extends Component {
                   </InfoWindow>
               }
           </Map>
-          <button onClick={this.openBar}>OPEN</button>
-        
         </MainContainer>
         </>
                    

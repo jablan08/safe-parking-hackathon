@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ResourceList from '../ResourceList/ResourceList'
+import ExpandedResource from '../ExpandedResource/ExpandedResource'
 class Footer extends Component {
 	state = {
         
@@ -19,7 +20,7 @@ class Footer extends Component {
 			return (
 			<div>
                 {this.props.clicked ?
-                <div>CLICKED THING</div>
+                <div><ExpandedResource selected={this.props.selected}/></div>
             :
             <div><ResourceList resources={this.props.resource}/></div>
             }

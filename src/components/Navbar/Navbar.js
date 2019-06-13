@@ -45,7 +45,7 @@ render() {
               &&
               <MDBNavLink to={routes.POST} onClick={this.toggleCollapse('navbarCollapse1')}><img src="/images/AddResourceButton.png"/></MDBNavLink>
             }
-            <button className="filter-btn"onClick={this.props.openBar}><img src="/images/Filter.png"/></button>
+            <button className="filter-btn" onClick={this.props.switchBar}><img src="/images/Filter.png"/></button>
             <MDBNavbarToggler onClick={this.toggleCollapse('navbarCollapse1')} />
           </div>
           <MDBCollapse id="navbarCollapse1" isOpen={this.state.collapseID} navbar>

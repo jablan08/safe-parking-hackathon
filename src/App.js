@@ -34,6 +34,16 @@ class App extends Component {
       showFilterBar: true
     })
   }
+  switchBar = ()=>{
+    if(this.state.showFilterBar){
+    this.setState({
+      showFilterBar: false
+    })
+  }else{
+    this.setState({
+      showFilterBar:true
+    })
+  }}
   closeBar = ()=>{
     this.setState({
       showFilterBar: false
@@ -57,9 +67,9 @@ class App extends Component {
     const { currentUser, showFilterBar } = this.state 
     return ( 
       <div>
-         <Navbar className="navbar" doLogout={this.doLogout} currentUser={currentUser} showFilterBar={showFilterBar} openBar={this.openBar}/>
+         <Navbar className="navbar" doLogout={this.doLogout} currentUser={currentUser} showFilterBar={showFilterBar} switchBar={this.switchBar} openBar={this.openBar}/>
          <Switch>
-          <Route exact path={routes.ROOT} render={()=>  <Map showFilterBar={showFilterBar}/> }/> 
+          <Route exact path={routes.ROOT} render={()=>  <Map showFilterBar={showFilterBar} openFilter={this.openBar} closeBar={this.closeBar}/> }/> 
           <Route exact path={routes.REGISTER} render={() => <Register currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.LOGIN} render={()=> <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.POST} render={()=> <NewResource currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />

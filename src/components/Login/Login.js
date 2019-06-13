@@ -17,23 +17,24 @@ const MainBox = styled.div`
 		
 	}
 	button {
-		width:30%;
-		height:15%;
-		background-color:rgb(152, 201, 228);
-		border-color:rgb(94, 172, 215);
-		border-width:1px;
-		font-size:1em;
+		width: 30%;
+    height: 2rem;
+    background-color: rgb(152,201,228);
+    border-color: rgb(94,172,215);
+    border-width: 0.04rem;
+    font-size: .7em;
+    border-radius: .3rem;
 		
 	}
 	input{
-		width:30%;
-		border: 1pt solid gray; 
-		padding:0;
-		line-height:1px;
-		font-size:1em;
+		width: 30%;
+    border: .01rem solid gray;
+    padding: 1rem;
+    line-height: .01rem;
+    font-size: .8em;
 	}
 	br{
-line-height:1px
+		line-height:1px
 	}
 
 	
@@ -42,7 +43,7 @@ line-height:1px
 
 class Login extends Component {
 	state = { 
-			email: "",
+			splaId: "",
 			password: "",
 			message: ""
 
@@ -69,7 +70,7 @@ class Login extends Component {
 					if (parsedResponse.success) {
 							localStorage.setItem("user", JSON.stringify(parsedResponse.user));
 							this.setState({
-									email: "",
+									splaId: "",
 									password: ""
 							})
 							this.props.setCurrentUser(parsedResponse.user)
@@ -83,7 +84,7 @@ class Login extends Component {
 			}
 	}
 	render() { 
-			const { email, password, message } = this.state
+			const { splaId, password, message } = this.state
 			return ( 
 					<>
 							<LoginContainer>
@@ -97,9 +98,9 @@ class Login extends Component {
 													<div className="login-box">
 															<form onSubmit={e => this.handleSubmit(e)}>
 																			
-																			<input className="input-box" type="text" name="email" placeholder="email" onChange={this.handleChange} value={email}/><br/>
+																			<input className="input-box" type="text" name="splaId" placeholder="Enter SPLA ID" onChange={this.handleChange} value={splaId}/><br/>
 																			
-																			<input className="input-box" type="password" name="password" placeholder="password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>
+																			<input className="input-box" type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>
 																			<button type="submit" className="button-submit"> LOG IN </button> <br/>
 																			<h6>{message} </h6> <br/>
 																	</form>

@@ -265,9 +265,11 @@ export class MapContainer extends Component {
         return (
           <>
             <Search searching={this.searching}/>
-            <Map google={this.props.google} zoom={15} initialCenter={ 
-              {lat: 34.0559993, lng: -118.2537683}
-            } center={center.lat ? center : {lat:lat, lng:lng}} >
+            <Map 
+              google={this.props.google} 
+              zoom={15} 
+              initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
+              center={center.lat ? center : {lat:lat, lng:lng}} style={{width: '100%', height: '100%'}} >
               {
                 resource.map((r,i)=>
                 

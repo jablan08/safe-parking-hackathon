@@ -1,18 +1,48 @@
+
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
+
 const LoginContainer = styled.div`
+
 
 `
 
 const MainBox = styled.div`
+	.sub-log-box {
+		display: flex;
+    flex-direction: column;
+    height: 40rem;
+    align-items: center;
+		
+	}
+	button {
+		width: 100%;
+    height: 2rem;
+    background-color: rgb(152,201,228);
+    border-color: rgb(94,172,215);
+    border-width: 0.04rem;
+    font-size: .7em;
+    border-radius: .3rem;
+		
+	}
+	input{
+		border: .01rem solid gray;
+    padding: 1rem 2rem 1rem;
+    line-height: .01rem;
+    font-size: 1.2em;
+	}
+	br{
+		line-height:1px
+	}
 
+	
 `
+
 
 class Login extends Component {
 	state = { 
-			email: "",
+			splaId: "",
 			password: "",
 			message: ""
 
@@ -39,7 +69,7 @@ class Login extends Component {
 					if (parsedResponse.success) {
 							localStorage.setItem("user", JSON.stringify(parsedResponse.user));
 							this.setState({
-									email: "",
+									splaId: "",
 									password: ""
 							})
 							this.props.setCurrentUser(parsedResponse.user)
@@ -53,7 +83,7 @@ class Login extends Component {
 			}
 	}
 	render() { 
-			const { email, password, message } = this.state
+			const { splaId, password, message } = this.state
 			return ( 
 					<>
 							<LoginContainer>
@@ -61,16 +91,15 @@ class Login extends Component {
 											<div className="sub-log-box">
 													<div>
 															<h1 className="sign-box">
-																	Sign in
+																Log In
 															</h1>
 													</div>
 													<div className="login-box">
 															<form onSubmit={e => this.handleSubmit(e)}>
-																			<label className="label-tag" htmlFor="email">Email</label>
-																			<input className="input-box" type="text" name="email" onChange={this.handleChange} value={email}/>
-																			<label className="label-tag" htmlFor="password">Password</label>
-																			<input className="input-box" type="password" name="password" onChange={this.handleChange} value={password} autoComplete="off"/>
-																			<button type="submit" className="button-submit"> Submit </button> <br/>
+																			<input className="input-box" type="text" name="splaId" placeholder="Enter SPLA ID" onChange={this.handleChange} value={splaId}/><br/>
+																			
+																			<input className="input-box" type="password" name="password" placeholder="Password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>
+																			<button type="submit" className="button-submit"> LOG IN </button> <br/>
 																			<h6>{message} </h6> <br/>
 																	</form>
 													</div>

@@ -1,7 +1,37 @@
 import React, {Component} from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearchLocation } from '@fortawesome/free-solid-svg-icons';
+import styled from "styled-components";
 
-
-
+const SearchBar = styled.form`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 4rem;
+    
+    > form {
+        display: flex;
+        flex-direction: row;
+        z-index: 1;
+        
+    }
+    .input-box {
+        display: flex;
+        flex-direction: column;
+        padding: .5rem 1.2rem;
+        background: #fff;
+        border: 1px solid #ddd;
+        cursor: text;
+        box-sizing: border-box;
+        border-radius: .5rem;
+        z-index: 1;
+    }
+    .form-btn {
+        z-index: 1;
+        border: none;
+        background: none;
+    }
+`
 // PASS IT A METHOD THAT TAKES VALUE AND DOES SOMETHING WITH IT IN PARENT COMPONENT
 class Search extends Component{
     state = {
@@ -24,15 +54,12 @@ class Search extends Component{
 
   render(){
       const { search } = this.state
-      console.log(search, "from search")
       return(
-          <div>
-            <form onSubmit={(e)=>this.handleSubmit(e)}> 
-                <input type='text' name="search" placeholder="search" 
-                value={search} onChange={(e)=>this.handleChange(e)} autoComplete="off" style={{height:"200px"}}/>
-                <button type="submit"> Submit</button>
-            </form>
-          </div>
+          <SearchBar onSubmit={(e)=>this.handleSubmit(e)}>
+                <input className="input-box" type='text' size="35" name="search" placeholder="Please enter your location" 
+                value={search} onChange={(e)=>this.handleChange(e)} autoComplete="off"/>
+                <button className="form-btn"type="submit"> Search <br/> <FontAwesomeIcon icon={faSearchLocation}/></button>
+          </SearchBar>
       )
 
   }

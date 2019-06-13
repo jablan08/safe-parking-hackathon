@@ -8,11 +8,13 @@ const ResourceSchema = new mongoose.Schema({
     address: String,
     email: String,
     phone: String,
-    hoursOfOperation: String,
+    hoursOfOperation: {},
     walkInsAllowed: Boolean,
     eligibilityRequirements: String,
     populationNotes: String,
     notes: String,
+    lat: Number,
+    lng: Number
 })
 
 const Resource = mongoose.model("Resource", ResourceSchema);

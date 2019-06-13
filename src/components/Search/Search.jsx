@@ -24,7 +24,6 @@ class Search extends Component{
 
   render(){
       const { search } = this.state
-      console.log(search, "from search")
       return(
           <div>
             <form onSubmit={(e)=>this.handleSubmit(e)}> 

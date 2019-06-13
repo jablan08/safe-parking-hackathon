@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ResourceList from '../ResourceList/ResourceList'
 import ExpandedResource from '../ExpandedResource/ExpandedResource'
+
+
 class Footer extends Component {
 	state = {
         
@@ -13,7 +15,9 @@ class Footer extends Component {
 
 		handleSubmit = async (e) => {
 			
-	}
+    }
+    
+
 
 	render() {
 		

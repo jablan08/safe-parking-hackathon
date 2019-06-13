@@ -144,6 +144,7 @@ export class MapContainer extends Component {
         address: "1448 N Alvarado St Los Angeles, CA 90026",
         email: "",
         phone: "323-400-8534",
+        hoursOfOperation: ["T: 6:00PM - 8:00PM "],
         walkInsAllowed: "Yes",
         eligibilityRequirements: "",
         populationNotes: "",

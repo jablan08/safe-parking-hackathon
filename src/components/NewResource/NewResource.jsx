@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import * as routes from "../../constants/routes";
 import Geocode from "react-geocode"
 import styled from "styled-components";
@@ -62,6 +62,7 @@ class NewResource extends Component{
     notes: "",
     lat: null,
     lng: null,
+    newResource: {}
 
   
     
@@ -78,9 +79,10 @@ class NewResource extends Component{
         }
       })
       const parsedResponse = await newResource.json();
-      this.setState({
-        newResource: parsedResponse.newResource
-      })
+      console.log(parsedResponse)
+      if (parsedResponse.success) {
+        this.props.history.push(routes.ROOT)
+      }
 
     } catch (error) {
             console.log(error)
@@ -117,7 +119,7 @@ class NewResource extends Component{
   }
 
   render(){
-      
+      console.log(this.state.newResource)
       return(
           <>
           {
@@ -199,4 +201,4 @@ class NewResource extends Component{
 
 }
 
-export default NewResource
+export default withRouter(NewResource)

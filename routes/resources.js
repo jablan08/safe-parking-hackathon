@@ -27,7 +27,8 @@ router.post('/new', async (req, res) => {
     const newResource = await Resource.create(req.body)
     console.log(newResource)
     res.json({
-      newResource
+      newResource,
+      success: newResource ? true : false
     })
   } catch (error) {
     res.json(error)

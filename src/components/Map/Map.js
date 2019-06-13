@@ -353,7 +353,6 @@ export class MapContainer extends Component {
       const { center, lat, lng, resource, zoom, filtered } = this.state
       console.log(this.state.filtered)
       return (
-        <>
         <MainContainer>
           <Map  
             streetViewControl={false}
@@ -435,8 +434,7 @@ export class MapContainer extends Component {
               }
           </Map>
         </MainContainer>
-        </>
-                   
+    
 
   )
 }

@@ -9,19 +9,20 @@ const SideBar = styled.div`
   .hide-bar {
     height: 100%;
     width: 0;
-    margin-top: 5rem;
+    
     position: fixed;
     top: 0;
     right: 0;
     background-color: rgb(250, 250, 250);
     overflow: hidden;
     transition: 0.8s;
+    
+    padding-top:10.5rem;
   }
   .show-bar {
     height: 100%;
     width: 50vw;
     position: fixed;
-    margin-top: 5rem;
     top: 0;
     right: 0;
     background-color: rgb(250,250,250);
@@ -30,6 +31,7 @@ const SideBar = styled.div`
     transition: 0.8s;
     font-size: .9rem;
     padding: 1.5rem;
+    padding-top:10.5rem;
     text-align: center;
   }
   .filters {
@@ -119,8 +121,8 @@ class Filter extends Component {
     return (
         <SideBar>
           <div className={showOrHide}>
-            <button className='closebtn' onClick={this.props.closeBar}>&times;</button>
-            <h1>Filters</h1>
+           
+            <h2>Filters</h2>
             <p>Resources</p>
             <div className='filters'>
               <div className='inputs'><input type="checkbox" value="Free groceries" onChange={this.onChange}/><label>Food & Groceries</label></div>

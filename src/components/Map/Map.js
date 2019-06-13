@@ -3,7 +3,6 @@ import Search from "../Search/Search"
 import Geocode from "react-geocode"
 import styled from "styled-components";
 import Filter from "../Filter/Filter"
-import Footer from "../Footer/Footer"
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
 
 
@@ -230,7 +229,7 @@ export class MapContainer extends Component {
         servicePlanningArea: "SPA 4 - Metro LA",
         operator: "SPLA Parking",
         website: "",
-        address: "",
+        address: "318E E 1st St, Los Angeles, CA 90012",
         email: "",
         phone: "",
         hoursOfOperation: "",
@@ -240,6 +239,22 @@ export class MapContainer extends Component {
         notes: "",
         lat: 34.0501069,
         lng: -118.2405926
+    },
+      {
+        resource: "SPLA Parking",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "Parking Garage",
+        website: "",
+        address: "530 S. Spring Street",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: 34.0468627,
+        lng: -118.2499926
     },
       {
         resource: "Service Planning Area",
@@ -286,11 +301,14 @@ export class MapContainer extends Component {
       this.setState({
         showFilterBar: true
       })
+      
     }
-    closeBar = ()=>{
+    closeBar = async()=>{
+      
       this.setState({
         showFilterBar: false
       })
+      
     }  
 
       
@@ -403,7 +421,7 @@ export class MapContainer extends Component {
               }
               <Search searching={this.searching}/>
                
-              <Filter closeBar={this.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
+              <Filter closeBar={this.props.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
               {
                   this.state.showingInfoWindow
                   &&

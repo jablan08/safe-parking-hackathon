@@ -4,11 +4,11 @@ import ResItem from './ResItem'
 
 
 const InsideFooter = styled.div`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     > ul {
         list-style: none;
-    }
+    } */
 `
 
 class ResourceList extends Component{

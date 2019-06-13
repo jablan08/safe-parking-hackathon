@@ -5,7 +5,7 @@ import Filter from "../Filter/Filter"
 import styled from "styled-components";
 
 const MainContainer = styled(MDBContainer)`
-  position:absolute;
+  /* position:absolute; */
   .filter-btn {
     z-index: 1;
     border: none;

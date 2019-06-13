@@ -1,19 +1,16 @@
 import React, { Component } from 'react'
 import ResourceList from '../ResourceList/ResourceList'
 import ExpandedResource from '../ExpandedResource/ExpandedResource'
-<<<<<<< HEAD
 import styled from 'styled-components'
 
 const FootContainer = styled.div`
-	    display: flex;
-    /* margin-top: 100%; */
+	/* display: flex;
+    
     position: absolute;
     bottom: 0;
-    flex-direction: column;
+    flex-direction: column; */
 
 `
-=======
->>>>>>> master
 
 
 class Footer extends Component {

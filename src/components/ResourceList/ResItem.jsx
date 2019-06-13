@@ -6,8 +6,8 @@ state={
 }
 
     
-     render(){
-         const res=this.props.res
+    render(){
+        const res=this.props.res
         return (
             
             <li>

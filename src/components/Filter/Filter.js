@@ -9,6 +9,7 @@ const SideBar = styled.div`
   .hide-bar {
     height: 100%;
     width: 0;
+    margin-top: 5rem;
     position: fixed;
     top: 0;
     right: 0;

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Search from "../Search/Search"
 import Geocode from "react-geocode"
 import styled from "styled-components";
+import Filter from "../Filter/Filter"
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
 
 
@@ -231,8 +232,24 @@ export class MapContainer extends Component {
         eligibilityRequirements: "",
         populationNotes: "",
         notes: "",
-        lat: 33.7679965,
-        lng: -118.2834131
+        lat: 34.0501069,
+        lng: -118.2405926
+    },
+      {
+        resource: "Service Planning Area",
+        servicePlanningArea: "SPA 4 - Metro LA",
+        operator: "Service Planning Area",
+        website: "",
+        address: "",
+        email: "",
+        phone: "",
+        hoursOfOperation: "",
+        walkInsAllowed: "",
+        eligibilityRequirements: "",
+        populationNotes: "",
+        notes: "",
+        lat: 34.0559993,
+        lng: -118.2537683
     },
     ],
       filtered: [],
@@ -252,6 +269,23 @@ export class MapContainer extends Component {
           lng:crd.longitude}
         })
       }
+    
+
+    setFilter = (filteredItems) => {
+      this.setState({
+        filtered: filteredItems
+      })
+    }
+    openBar = ()=>{
+      this.setState({
+        showFilterBar: true
+      })
+    }
+    closeBar = ()=>{
+      this.setState({
+        showFilterBar: false
+      })
+    }  
 
       
     setSearch = (states) => {
@@ -291,7 +325,8 @@ export class MapContainer extends Component {
       this.setSearch(theSearch)
     } 
     render() {
-      const { center, lat, lng, resource, zoom } = this.state
+      const { center, lat, lng, resource, zoom, filtered } = this.state
+      console.log(this.state.filtered)
       return (
         <MainContainer>
           <Map  
@@ -301,8 +336,10 @@ export class MapContainer extends Component {
             initialCenter={ {lat: 34.0559993, lng: -118.2537683}} 
             center={center.lat ? center : {lat:lat, lng:lng}} >
             {
+              filtered.length === 0
+              ? 
+
               resource.map((r,i)=>
-              
               <Marker key={i}
                   position={{lat: r.lat, lng: r.lng}}
                   icon={{
@@ -317,7 +354,8 @@ export class MapContainer extends Component {
                             : r.resource === "Substance Abuse"
                               ? "/images/hospitalPointer.jpg"
                               : r.resource === "SPLA Parking"
-                                && "/images/parkingPointer.png",
+                                ? "/images/parkingPointer.png"
+                                : "/images/parkingPointer.png",
                       width: 15, height: 20
                     }  
                 }
@@ -325,8 +363,36 @@ export class MapContainer extends Component {
                   >
               </Marker>
               )
+              :
+              filtered.map((r,i)=>
+              <Marker key={i}
+                  position={{lat: r.lat, lng: r.lng}}
+                  icon={{
+                      url: 
+                      
+                        r.resource === "Meals"
+                        ? "/images/foodPointer.png"
+                        : r.resource === "Free groceries"
+                          ? "/images/groceriesPointer.png"
+                          : r.resource === "Mental Health"
+                            ? "/images/mentalHealthPointer.png"
+                            : r.resource === "Substance Abuse"
+                              ? "/images/hospitalPointer.jpg"
+                              : r.resource === "SPLA Parking"
+                                ? "/images/parkingPointer.png"
+                                : "",
+                      width: 15, height: 20
+                    }  
+                }
+                  onClick = {(props, marker, e) => this.handleClick(props, marker, e, i)}
+                  >
+              </Marker>
+              )
+
               }
               <Search searching={this.searching}/>
+               
+              <Filter closeBar={this.closeBar} show={this.state.showFilterBar} resource={resource} setFilter={this.setFilter}/>
               {
                   this.state.showingInfoWindow
                   &&
@@ -337,6 +403,7 @@ export class MapContainer extends Component {
                   </InfoWindow>
               }
           </Map>
+          <button onClick={this.openBar}>OPEN</button>
         </MainContainer>
 
   )

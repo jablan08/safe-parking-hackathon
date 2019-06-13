@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ResourceList from '../ResourceList/ResourceList'
 import ExpandedResource from '../ExpandedResource/ExpandedResource'
+<<<<<<< HEAD
 import styled from 'styled-components'
 
 const FootContainer = styled.div`
@@ -11,6 +12,8 @@ const FootContainer = styled.div`
     flex-direction: column;
 
 `
+=======
+>>>>>>> master
 
 
 class Footer extends Component {
@@ -25,7 +28,9 @@ class Footer extends Component {
 
 		handleSubmit = async (e) => {
 			
-	}
+    }
+    
+
 
 	render() {
 		

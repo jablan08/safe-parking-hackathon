@@ -1,14 +1,44 @@
+
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 
+
 const LoginContainer = styled.div`
+
 
 `
 
 const MainBox = styled.div`
+	.sub-log-box {
+		margin:0 auto;
+		width:40rem;
+		height:40rem;
+		text-align:center;
+		
+	}
+	button {
+		width:30%;
+		height:15%;
+		background-color:rgb(152, 201, 228);
+		border-color:rgb(94, 172, 215);
+		border-width:1px;
+		font-size:1em;
+		
+	}
+	input{
+		width:30%;
+		border: 1pt solid gray; 
+		padding:0;
+		line-height:1px;
+		font-size:1em;
+	}
+	br{
+line-height:1px
+	}
 
+	
 `
+
 
 class Login extends Component {
 	state = { 
@@ -61,16 +91,16 @@ class Login extends Component {
 											<div className="sub-log-box">
 													<div>
 															<h1 className="sign-box">
-																	Sign in
+																Log In
 															</h1>
 													</div>
 													<div className="login-box">
 															<form onSubmit={e => this.handleSubmit(e)}>
-																			<label className="label-tag" htmlFor="email">Email</label>
-																			<input className="input-box" type="text" name="email" onChange={this.handleChange} value={email}/>
-																			<label className="label-tag" htmlFor="password">Password</label>
-																			<input className="input-box" type="password" name="password" onChange={this.handleChange} value={password} autoComplete="off"/>
-																			<button type="submit" className="button-submit"> Submit </button> <br/>
+																			
+																			<input className="input-box" type="text" name="email" placeholder="email" onChange={this.handleChange} value={email}/><br/>
+																			
+																			<input className="input-box" type="password" name="password" placeholder="password" onChange={this.handleChange} value={password} autoComplete="off"/><br/><p/>
+																			<button type="submit" className="button-submit"> LOG IN </button> <br/>
 																			<h6>{message} </h6> <br/>
 																	</form>
 													</div>

@@ -54,7 +54,7 @@ render() {
           <MDBCollapse id="navbarCollapse1" isOpen={this.state.collapseID} navbar>
             <NavbarNav left>
               <MDBNavItem>
-                
+              <MDBNavLink className="add-resource"to={routes.POST} >Home</MDBNavLink>
               </MDBNavItem>
               
               { 

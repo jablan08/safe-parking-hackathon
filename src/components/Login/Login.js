@@ -24,15 +24,15 @@ const MainBox = styled.div`
     background-color: rgb(152,201,228);
     border-color: rgb(94,172,215);
     border-width: 0.04rem;
-    font-size: 1.45em;
+    font-size: .7em;
     border-radius: .3rem;
 		
 	}
 	input{
 		border: .01rem solid gray;
-    padding: 1rem 1rem;
+    padding: 1rem 2rem 1rem;
     line-height: .01rem;
-    font-size: 1.1em;
+    font-size: 1.2em;
 	}
 	br{
 		line-height:1px

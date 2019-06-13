@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer, MDBBtn, MD } from 'mdbreact';
+import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer} from 'mdbreact';
 import * as routes from '../../constants/routes'
-import Filter from "../Filter/Filter"
 import styled from "styled-components";
 
 const MainContainer = styled(MDBContainer)`
@@ -36,16 +35,16 @@ render() {
     <MainContainer>
       <MDBNavbar color="light-blue lighten-4" style={{ marginTop: '20px', 'opacity': .73 }} light>
         <MDBContainer>
-          <MDBNavbarBrand>
-            <img className="img-logo" src="/images/Logo.png"/>
+          <MDBNavbarBrand >
+            <img className="img-logo" src="/images/Logo.png" alt=""/>
           </MDBNavbarBrand>
           <div className="nav-btns">
             {
               this.props.currentUser.splaId
               &&
-              <MDBNavLink to={routes.POST} onClick={this.toggleCollapse('navbarCollapse1')}><img src="/images/AddResourceButton.png"/></MDBNavLink>
+              <MDBNavLink to={routes.POST} ><img src="/images/AddResourceButton.png" alt=""/></MDBNavLink>
             }
-            <button className="filter-btn"onClick={this.props.openBar}><img src="/images/Filter.png"/></button>
+            <button className="filter-btn"onClick={this.props.openBar}><img src="/images/Filter.png" alt=""/></button>
             <MDBNavbarToggler onClick={this.toggleCollapse('navbarCollapse1')} />
           </div>
           <MDBCollapse id="navbarCollapse1" isOpen={this.state.collapseID} navbar>

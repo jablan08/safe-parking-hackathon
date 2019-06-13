@@ -29,13 +29,8 @@ const NewForm = styled.form`
   .label-tag {
     margin: 0 4rem;
   }
-  .top-form {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-  }
 `
-class NewResource extends Component{
+class EditResource extends Component{
 
   state = {
     resource: "",
@@ -116,11 +111,8 @@ class NewResource extends Component{
       return(
           
           <NewForm onSubmit={(e)=>this.handleSubmit(e)}>
-            <div className="top-form">
-
-              <h1>Add Resource</h1>
-              <img src="/images/addphoto.png" alt=''/>
-            </div>
+            <h1>Add Resource</h1>
+            <img src=""/>
             {/* <label className="label-tag" htmlFor="servicePlanningArea">Service Planning Area:</label>
             <input type='text' name="servicePlanningArea"
           onChange={this.handleChange} autoComplete="off"/><br/>   */}
@@ -188,4 +180,4 @@ class NewResource extends Component{
 
 }
 
-export default NewResource
+export default EditResource

@@ -22,6 +22,9 @@ const MainContainer = styled(MDBContainer)`
   .more-navbar {
     padding: .5rem 0rem;
   }
+  .add-resource {
+    padding: 0.5rem .4rem;
+  }
 `
 
 class Navbar extends Component {

@@ -4,6 +4,7 @@ import Login from "./components/Login/Login";
 import NewResource from "./components/NewResource/NewResource"
 import Register from "./components/Register/Register";
 import Navbar from "../src/components/Navbar/Navbar"
+import EditResource from "../src/components/EditResource/EditResource"
 
 import * as routes from "./constants/routes";
 
@@ -73,6 +74,7 @@ class App extends Component {
           <Route exact path={routes.REGISTER} render={() => <Register currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.LOGIN} render={()=> <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.POST} render={()=> <NewResource currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
+          <Route path = {`${routes.RESOURCES}/:id`} render={()=><EditResource/>}/>
           <Route render={()=> <div>You're LOST</div>}/>
         </Switch>
        

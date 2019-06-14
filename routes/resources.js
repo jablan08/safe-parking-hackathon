@@ -15,6 +15,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+
 // Create resource
 router.post('/new', async (req, res) => {
   try {
@@ -62,6 +63,14 @@ router.put('/:id', async (req,res)=> {
   }
 });
 
-
+router.get('/:id', async (req, res) => {
+  
+  try {
+    const resource = await Resource.findById(this.params.id);
+    res.json({resource})
+  } catch (error) {
+    res.json({error})
+  }
+});
 
 module.exports = router;

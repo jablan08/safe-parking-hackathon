@@ -13,6 +13,7 @@ const SearchBar = styled.form`
         display: flex;
         flex-direction: row;
         z-index: 1;
+        font-size: 1rem;
         
     }
     .input-box {

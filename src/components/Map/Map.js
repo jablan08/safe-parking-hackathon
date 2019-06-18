@@ -18,7 +18,7 @@ const MainContainer = styled.div`
  }
   
 `
-Geocode.setApiKey('AIzaSyBbcC3bMFjuryUo-PkKcNze8g_kD-TuSm4');
+Geocode.setApiKey(process.env.REACT_APP_USE_THIS);
 Geocode.enableDebug();
 
 export class MapContainer extends Component {
@@ -316,6 +316,7 @@ export class MapContainer extends Component {
       Geocode.fromAddress(states).then(
         response => {
           const { lat, lng } = response.results[0].geometry.location;
+          console.log(lat, lng)
           this.setState({
             lat:lat,
             lng:lng
@@ -351,7 +352,9 @@ export class MapContainer extends Component {
     } 
     render() {
       const { center, lat, lng, resource, zoom, filtered } = this.state
-      console.log(this.state.filtered)
+      // console.log(this.state.filtered)
+      // console.log(process.env)
+      // console.log(this.state, "=====")
       return (
         <MainContainer>
           <Map  
@@ -441,5 +444,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBbcC3bMFjuryUo-PkKcNze8g_kD-TuSm4'
+  apiKey: process.env.REACT_APP_USE_THIS
 })(MapContainer)

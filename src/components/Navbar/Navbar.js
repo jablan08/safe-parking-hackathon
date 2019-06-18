@@ -25,6 +25,9 @@ const MainContainer = styled(MDBContainer)`
   .add-resource {
     padding: 0.5rem .4rem;
   }
+  .container {
+    max-width: none;
+  }
 `
 
 class Navbar extends Component {
@@ -39,9 +42,9 @@ toggleCollapse = collapseID => () => {
 
 render() {
   return (
-    <MainContainer>
+    <MainContainer style={{maxWidth: "none"}}>
       <MDBNavbar color="light-blue lighten-4" style={{ marginTop: '20px', 'opacity': .73 }} light>
-        <MDBContainer>
+        <MDBContainer >
           <MDBNavbarBrand >
             <MDBNavLink to={routes.ROOT} onClick={this.toggleCollapse('navbarCollapse1')}><img className="img-logo" src="/images/Logo.png" alt=""/></MDBNavLink>
             

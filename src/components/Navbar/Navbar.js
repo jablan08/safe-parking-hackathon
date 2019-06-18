@@ -28,6 +28,7 @@ const MainContainer = styled(MDBContainer)`
   }
   .inside-container {
     flex-wrap: nowrap !important;
+    max-width: none !important;
   }
 `
 

@@ -7,7 +7,7 @@ const SearchBar = styled.form`
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 7.5rem;
+    margin-top: 10.5rem;
     
     > form {
         display: flex;
@@ -57,7 +57,7 @@ class Search extends Component{
       const { search } = this.state
       return(
           <SearchBar onSubmit={(e)=>this.handleSubmit(e)}>
-                <input className="input-box" type='text' size="34" name="search" placeholder="Please enter your location" 
+                <input className="input-box" type='text' size="30" name="search" placeholder="Please enter your location" 
                 value={search} onChange={(e)=>this.handleChange(e)} autoComplete="off"/>
                 <button className="form-btn"type="submit"> Search <br/> <FontAwesomeIcon icon={faSearchLocation}/></button>
           </SearchBar>

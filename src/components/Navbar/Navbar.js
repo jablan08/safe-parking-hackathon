@@ -6,6 +6,7 @@ import styled from "styled-components";
 const MainContainer = styled(MDBContainer)`
   position:absolute;
   width: 100%;
+  max-width: none !important;
  /* text-align: center; */
   .filter-btn {
     z-index: 1;
@@ -25,8 +26,8 @@ const MainContainer = styled(MDBContainer)`
   .add-resource {
     padding: 0.5rem .4rem;
   }
-  .container {
-    max-width: none;
+  .inside-container {
+    flex-wrap: nowrap !important;
   }
 `
 
@@ -42,9 +43,9 @@ toggleCollapse = collapseID => () => {
 
 render() {
   return (
-    <MainContainer style={{maxWidth: "none"}}>
+    <MainContainer>
       <MDBNavbar color="light-blue lighten-4" style={{ marginTop: '20px', 'opacity': .73 }} light>
-        <MDBContainer >
+        <MDBContainer className="inside-container">
           <MDBNavbarBrand >
             <MDBNavLink to={routes.ROOT} onClick={this.toggleCollapse('navbarCollapse1')}><img className="img-logo" src="/images/Logo.png" alt=""/></MDBNavLink>
             

@@ -18,7 +18,7 @@ const MainContainer = styled.div`
  }
   
 `
-Geocode.setApiKey(process.env.REACT_APP_USE_THIS);
+Geocode.setApiKey(process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU :process.env.REACT_APP_USE_THIS);
 Geocode.enableDebug();
 
 export class MapContainer extends Component {
@@ -444,5 +444,5 @@ export class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: process.env.REACT_APP_USE_THIS
+  apiKey: process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU :process.env.REACT_APP_USE_THIS
 })(MapContainer)

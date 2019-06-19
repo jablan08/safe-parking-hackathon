@@ -45,7 +45,8 @@ router.delete('/:id', async (req, res) => {
     const deletedResource = await Resource.findByIdAndRemove(req.params.id)
 
     res.json({
-      deletedResource
+      deletedResource,
+      success: deletedResource ? true : false
     })
   } catch (error) {
     console.log(error)

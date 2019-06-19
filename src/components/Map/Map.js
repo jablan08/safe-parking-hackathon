@@ -12,10 +12,14 @@ const MainContainer = styled.div`
     height:100%;
     z-index: -1;
   }
-  .footer{
-    
-    
- }
+  .info-window {
+    display: flex;
+    flex-direction: column;
+  }
+  .info-titles {
+    margin: 0;
+    font-weight: normal;
+  }
   
 `
 Geocode.setApiKey(process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU : process.env.REACT_APP_USE_THIS);
@@ -319,6 +323,21 @@ export class MapContainer extends Component {
       }
 
     }
+    handleDeleteResource = async (id) => {
+      const deleteResource = await fetch(`/resources/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      const parsedResponse = await deleteResource.json();
+      if (parsedResponse.success) {
+        this.setState({
+          res: this.state.res.filter(r => r._id !== id)
+        })
+      }
+    }
 
       
     setSearch = (states) => {
@@ -376,7 +395,7 @@ export class MapContainer extends Component {
       this.setSearch(theSearch)
     } 
     render() {
-      const { center, lat, lng, resource, zoom, filtered, showingInfoWindow, selectedResource, activeMarker, res } = this.state
+      const { center, lat, lng, resource, zoom, filtered, showingInfoWindow, selectedResource, activeMarker, res, } = this.state
       // console.log(this.state.filtered)
       // console.log(process.env)
       console.log(this.state.res, "=====")
@@ -453,10 +472,21 @@ export class MapContainer extends Component {
                   showingInfoWindow
                   &&
                   <InfoWindow marker={activeMarker} visible={showingInfoWindow}>
-                      <div>
-                          <h3>{selectedResource.operator}</h3><br/>
-                          <b>{selectedResource.resource}</b><br/>
+                      <div className="info-window">
+                          <h3 className="info-titles">{selectedResource.operator}</h3>
+                          <b>Provides: {selectedResource.resource}</b>
+                          <h4 className="info-titles">Hours:</h4>
+                          <b>M: {selectedResource.hoursOfOperation.m === "" ? "Closed" : selectedResource.hoursOfOperation.m}</b>
+                          <b>T: {selectedResource.hoursOfOperation.t === "" ? "Closed" : selectedResource.hoursOfOperation.t}</b>
+                          <b>W: {selectedResource.hoursOfOperation.w === "" ? "Closed" : selectedResource.hoursOfOperation.w}</b>
+                          <b>TH: {selectedResource.hoursOfOperation.th === "" ? "Closed" : selectedResource.hoursOfOperation.th}</b>
+                          <b>F: {selectedResource.hoursOfOperation.f === "" ? "Closed" : selectedResource.hoursOfOperation.f}</b>
+                          <b>SAT: {selectedResource.hoursOfOperation.sat === "" ? "Closed" : selectedResource.hoursOfOperation.sat}</b>
+                          <b>SUN: {selectedResource.hoursOfOperation.sun === "" ? "Closed" : selectedResource.hoursOfOperation.sun}</b>
+
+
                           {selectedResource.phone}
+
                           <a href={`/resources/${selectedResource._id}`}>Edit</a>
                       </div>
                   </InfoWindow>

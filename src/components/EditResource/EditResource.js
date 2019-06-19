@@ -3,6 +3,8 @@ import Geocode from "react-geocode"
 import styled from "styled-components";
 import * as routes from "../../constants/routes"
 import {withRouter, Link} from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons"
 
 const NewForm = styled.form`
 
@@ -38,6 +40,14 @@ const NewForm = styled.form`
 	.message {
 		text-align: center;
 	}
+	.delete-btn {
+		border: none;
+		background: none;
+		font-size: 1rem;
+		:hover {
+			color: red
+		}
+	}
 `
 class EditResource extends Component{
 	state = {
@@ -65,124 +75,138 @@ class EditResource extends Component{
 		lng: null,
 		loaded:false,
 		id: null
-}
+	}
 
-editResource = async () => {
-	try {
-		const newResource = await fetch(`/resources/${this.state.id}`, {
-			method: "PUT",
-			credentials: "include",
-			body: JSON.stringify(this.state),
-			headers: {
-							"Content-Type": "application/json"
+	editResource = async () => {
+		try {
+			const newResource = await fetch(`/resources/${this.state.id}`, {
+				method: "PUT",
+				credentials: "include",
+				body: JSON.stringify(this.state),
+				headers: {
+								"Content-Type": "application/json"
+				}
+			})
+			const parsedResponse = await newResource.json();
+		
+			if (parsedResponse.success) {
+				this.setState({
+					resource: parsedResponse.resource.resource,
+					servicePlanningArea: parsedResponse.resource.servicePlanningArea,
+					operator: parsedResponse.resource.operator,
+					website: parsedResponse.resource.website,
+					address: parsedResponse.resource.address,
+					email: parsedResponse.resource.email,
+					phone: parsedResponse.resource.phone,
+					hoursOfOperation: parsedResponse.resource.hoursOfOperation,
+					walkInsAllowed: parsedResponse.resource.walkInsAllowed,
+					eligibilityRequirements: parsedResponse.resource.eligibilityRequirements,
+					populationNotes: parsedResponse.resource.populationNotes,
+					notes: parsedResponse.resource.notes,
+					lat: parsedResponse.resource.lat,
+					lng: parsedResponse.resource.lng,
+					loaded:true,
+					id: parsedResponse.resource._id,
+					message: "Resource has been updated!"
+				})
+			}
+		} catch (error) {
+						console.log(error)
+		}
+	}
+
+
+	componentDidMount(){
+		this.populateEverything().then(allData=>{
+			this.setState({
+				resource: allData.resource,
+				servicePlanningArea: allData.servicePlanningArea,
+				operator: allData.operator,
+				website: allData.website,
+				address: allData.address,
+				email: allData.email,
+				phone: allData.phone,
+				hoursOfOperation: allData.hoursOfOperation,
+				walkInsAllowed: allData.walkInsAllowed,
+				eligibilityRequirements: allData.eligibilityRequirements,
+				populationNotes: allData.populationNotes,
+				notes: allData.notes,
+				lat: allData.lat,
+				lng: allData.lng,
+				loaded:true,
+				id: allData._id
+			})
+		})
+	}
+
+
+	handleChange = (e) =>
+	{	console.log(e.target)
+		this.setState({
+				[e.target.name]: e.target.value
+	})}
+	handleTimeChange = (e) => {    
+		console.log(e.target)
+			this.setState({
+			hoursOfOperation:{
+				...this.state.hoursOfOperation,
+								[e.target.name]: e.target.value
 			}
 		})
-		const parsedResponse = await newResource.json();
-	
-		if (parsedResponse.success) {
-			this.setState({
-				resource: parsedResponse.resource.resource,
-				servicePlanningArea: parsedResponse.resource.servicePlanningArea,
-				operator: parsedResponse.resource.operator,
-				website: parsedResponse.resource.website,
-				address: parsedResponse.resource.address,
-				email: parsedResponse.resource.email,
-				phone: parsedResponse.resource.phone,
-				hoursOfOperation: parsedResponse.resource.hoursOfOperation,
-				walkInsAllowed: parsedResponse.resource.walkInsAllowed,
-				eligibilityRequirements: parsedResponse.resource.eligibilityRequirements,
-				populationNotes: parsedResponse.resource.populationNotes,
-				notes: parsedResponse.resource.notes,
-				lat: parsedResponse.resource.lat,
-				lng: parsedResponse.resource.lng,
-				loaded:true,
-				id: parsedResponse.resource._id,
-				message: "Resource has been updated!"
-			})
-		}
-	} catch (error) {
-					console.log(error)
-	}
-}
-
-
-componentDidMount(){
-	this.populateEverything().then(allData=>{
-		this.setState({
-			resource: allData.resource,
-			servicePlanningArea: allData.servicePlanningArea,
-			operator: allData.operator,
-			website: allData.website,
-			address: allData.address,
-			email: allData.email,
-			phone: allData.phone,
-			hoursOfOperation: allData.hoursOfOperation,
-			walkInsAllowed: allData.walkInsAllowed,
-			eligibilityRequirements: allData.eligibilityRequirements,
-			populationNotes: allData.populationNotes,
-			notes: allData.notes,
-			lat: allData.lat,
-			lng: allData.lng,
-			loaded:true,
-			id: allData._id
-		})
-	})
-}
-
-
-handleChange = (e) =>
-{	console.log(e.target)
-	this.setState({
-			[e.target.name]: e.target.value
-})}
-handleTimeChange = (e) => {    
-	console.log(e.target)
-		this.setState({
-		hoursOfOperation:{
-			...this.state.hoursOfOperation,
-							[e.target.name]: e.target.value
-		}
-	})
-}
-
-setSearch = (address) => {
-	Geocode.fromAddress(address).then(
-		response => {
-			const { lat, lng } = response.results[0].geometry.location;
-			this.setState({
-				lat:lat,
-				lng:lng
-			})
-			this.editResource()
-		},
-		error => {
-			console.error(error);
-		});
 	}
 
-handleSubmit = async (e) => {
-	e.preventDefault();
-	this.setSearch(this.state.address)
-}
+	setSearch = (address) => {
+		Geocode.fromAddress(address).then(
+			response => {
+				const { lat, lng } = response.results[0].geometry.location;
+				this.setState({
+					lat:lat,
+					lng:lng
+				})
+				this.editResource()
+			},
+			error => {
+				console.error(error);
+			});
+		}
+
+	handleSubmit = async (e) => {
+		e.preventDefault();
+		this.setSearch(this.state.address)
+	}
 
 
 
 
-populateEverything = async() => {
-	try {
-		const response = await fetch(`/resources/${this.props.match.params.id}`, {
+	populateEverything = async() => {
+		try {
+			const response = await fetch(`/resources/${this.props.match.params.id}`, {
+				credentials: "include",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+			const res = await response.json()
+			console.log(res.resource, "====")
+			return res.resource
+		} catch (error) {
+			console.log(error)
+		}
+	}
+	handleDeleteResource = async (id) => {
+		const deleteResource = await fetch(`/resources/${id}`, {
+			method: "DELETE",
 			credentials: "include",
 			headers: {
 				"Content-Type": "application/json"
 			}
 		})
-		const res = await response.json()
-		return res.resource
-		
-	} catch (error) {
-		console.log(error)
+		const parsedResponse = await deleteResource.json();
+		if (parsedResponse.success) {
+			this.props.history.push(routes.ROOT)
+		}
 	}
-	}
+
 
 
 
@@ -190,7 +214,7 @@ populateEverything = async() => {
 
 	render(){
 		console.log(this.state)
-		const { resource, operator, address, phone, hoursOfOperation, message} = this.state
+		const { resource, operator, address, phone, hoursOfOperation, message, id} = this.state
 		return(
 				this.state.loaded
 				?
@@ -198,6 +222,7 @@ populateEverything = async() => {
 				<NewForm onSubmit={(e)=>this.handleSubmit(e)}>
 					<h1>Edit Resource</h1>
 					<img src="" alt=""/>
+					<button className="delete-btn" onClick={()=> this.handleDeleteResource(id)}>Delete Resource <FontAwesomeIcon icon={faTrashAlt}/></button>
 					{/* <label className="label-tag" htmlFor="servicePlanningArea">Service Planning Area:</label>
 					<input type='text' name="servicePlanningArea"
 				onChange={this.handleChange} autoComplete="off"/><br/>   */}

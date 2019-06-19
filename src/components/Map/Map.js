@@ -18,7 +18,7 @@ const MainContainer = styled.div`
  }
   
 `
-Geocode.setApiKey("AIzaSyBnAunVqAFsJ1gMstAtzl-em5_lwwIDdaA");
+Geocode.setApiKey(process.env.NODE_ENV === "production" ? process.env.REACT_APP_HEROKU : process.env.REACT_APP_USE_THIS);
 Geocode.enableDebug();
 
 export class MapContainer extends Component {

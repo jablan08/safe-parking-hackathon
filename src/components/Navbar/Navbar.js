@@ -18,7 +18,11 @@ const MainContainer = styled(MDBContainer)`
     display: flex;
   }
   .navButton {
-    margin-left: .3rem;
+    @media (max-width: 992px) {
+      padding-right: .4rem;
+      padding-left: .4rem;
+    }
+    
   }
   .more-navbar {
     padding: .5rem 0rem;

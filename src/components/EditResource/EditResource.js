@@ -1,36 +1,43 @@
 import React, {Component} from 'react'
 import Geocode from "react-geocode"
 import styled from "styled-components";
-import {withRouter} from "react-router-dom"
+import * as routes from "../../constants/routes"
+import {withRouter, Link} from "react-router-dom"
 
 const NewForm = styled.form`
 
-display: flex;
-flex-direction: column;
-button {
+	display: flex;
+	flex-direction: column;
+	button {
 
-	height: 2rem;
-	background-color: rgb(152,201,228);
-	border-color: rgb(94,172,215);
-	border-width: 0.04rem;
-	font-size: .7em;
-	border-radius: .3rem;
-	margin: 0 4rem;
-	
-}
-h1 {
-	text-align: center;
-	margin-top: 8rem;
-}
-input {
-	margin: 0.4rem 4rem;
-	border: .01rem solid rgb(151 151 151);
-	font-size: 1rem;
-	padding: 1rem;
-}
-.label-tag {
-	margin: 0 4rem;
-}
+		height: 2rem;
+		background-color: rgb(152,201,228);
+		border-color: rgb(94,172,215);
+		border-width: 0.04rem;
+		font-size: .7em;
+		border-radius: .3rem;
+		margin: 0 4rem;
+		
+	}
+	h1 {
+		text-align: center;
+		margin-top: 8rem;
+	}
+	input {
+		margin: 0.4rem 4rem;
+		border: .01rem solid rgb(151 151 151);
+		font-size: 1rem;
+		padding: 1rem;
+	}
+	.label-tag {
+		margin: 0 4rem;
+	}
+	.link-home {
+		text-align: center;
+	}
+	.message {
+		text-align: center;
+	}
 `
 class EditResource extends Component{
 	state = {
@@ -62,7 +69,7 @@ class EditResource extends Component{
 
 editResource = async () => {
 	try {
-		const newResource = await (`/resources/${this.state.id}`, {
+		const newResource = await fetch(`/resources/${this.state.id}`, {
 			method: "PUT",
 			credentials: "include",
 			body: JSON.stringify(this.state),
@@ -71,7 +78,7 @@ editResource = async () => {
 			}
 		})
 		const parsedResponse = await newResource.json();
-		console.log(parsedResponse)
+	
 		if (parsedResponse.success) {
 			this.setState({
 				resource: parsedResponse.resource.resource,
@@ -89,7 +96,8 @@ editResource = async () => {
 				lat: parsedResponse.resource.lat,
 				lng: parsedResponse.resource.lng,
 				loaded:true,
-				id: parsedResponse.resource._id
+				id: parsedResponse.resource._id,
+				message: "Resource has been updated!"
 			})
 		}
 	} catch (error) {
@@ -182,6 +190,7 @@ populateEverything = async() => {
 
 	render(){
 		console.log(this.state)
+		const { resource, operator, address, phone, hoursOfOperation, message} = this.state
 		return(
 				this.state.loaded
 				?
@@ -193,44 +202,44 @@ populateEverything = async() => {
 					<input type='text' name="servicePlanningArea"
 				onChange={this.handleChange} autoComplete="off"/><br/>   */}
 					<label className="label-tag" htmlFor="operator">Name:</label>
-					<input type='text' name="operator" value={this.state.operator}
+					<input type='text' name="operator" value={operator}
 						onChange={this.handleChange} autoComplete="off" placeholder="Enter Name"/><br/>  
 					{/* <label className="label-tag" htmlFor="website">Website:</label> 
 					<input type='text' name="website"
 				onChange={this.handleChange} autoComplete="off"/><br/>   */}
 						<label className="label-tag" htmlFor="address">Location:</label>
-					<input type='text' name="address" value={this.state.address}
+					<input type='text' name="address" value={address}
 						onChange={this.handleChange} autoComplete="off" placeholder="Enter Location" /><br/>  
 				<label className="label-tag" htmlFor="resource">Category:</label>
-				<input type='text' name="resource" value={this.state.resource}
+				<input type='text' name="resource" value={resource}
 					onChange={this.handleChange} autoComplete="off" placeholder="Category"/><br/>
 						{/* <label className="label-tag" htmlFor="email">Email:</label>
 					<input type='text' name="email"
 						onChange={this.handleChange} autoComplete="off"/><br/>   */}
 					<label className="label-tag" htmlFor="phone">Phone (XXX)-XXX-XXXX:</label>
-					<input type='text' name="phone" placeholder="(XXX)-XXX-XXXX" value={this.state.phone}
+					<input type='text' name="phone" placeholder="(XXX)-XXX-XXXX" value={phone}
 						onChange={this.handleChange} autoComplete="off" /><br/>  
 					<label className="label-tag" htmlFor="hoursOfOperation">Hours Of Operation:</label>
 					<label className="label-tag" htmlFor="monday">Monday </label>
-					<input type='text' name="m" day="m" value={this.state.hoursOfOperation.m }
+					<input type='text' name="m" day="m" value={hoursOfOperation.m }
 						onChange={this.handleTimeChange} autoComplete="off" placeholder="Ex: 8:00AM - 10:00AM" /> 
 					<label className="label-tag" htmlFor="tuesday">Tuesday</label>  
-					<input type='text' name="t" value={this.state.hoursOfOperation.t }
+					<input type='text' name="t" value={hoursOfOperation.t }
 						onChange={this.handleTimeChange} autoComplete="off" placeholder="Ex: 8:00AM - 10:00AM"/> 
 					<label className="label-tag" htmlFor="wednesday">Wednesday</label>   
-					<input type='text' name="w" value={this.state.hoursOfOperation.w}
+					<input type='text' name="w" value={hoursOfOperation.w}
 						onChange={this.handleTimeChange} autoComplete="off" placeholder="Ex: 8:00AM - 10:00AM"/> 
 					<label className="label-tag" htmlFor="thursday">Thursday</label>  
-					<input type='text' name="th" value={this.state.hoursOfOperation.th}
+					<input type='text' name="th" value={hoursOfOperation.th}
 						onChange={this.handleTimeChange} autoComplete="off" placeholder="Ex: 8:00AM - 10:00AM"/>
 					<label className="label-tag" htmlFor="friday">Friday</label>  
-					<input type='text' name="f" value={this.state.hoursOfOperation.f}
+					<input type='text' name="f" value={hoursOfOperation.f}
 						onChange={this.handleTimeChange} autoComplete="off" placeholder="Ex: 8:00AM - 10:00AM"/>
 					<label className="label-tag" htmlFor="saturday">Saturday</label> 
-					<input type='text' name="sat" value={this.state.hoursOfOperation.s}
+					<input type='text' name="sat" value={hoursOfOperation.s}
 						onChange={this.handleTimeChange} autoComplete="off" placeholder="Ex: 8:00AM - 10:00AM"/>
 					<label className="label-tag" htmlFor="sunday">Sunday</label>  
-					<input type='text' name="sun" value={this.state.hoursOfOperation.sun}
+					<input type='text' name="sun" value={hoursOfOperation.sun}
 						onChange={this.handleTimeChange} autoComplete="off" placeholder="Ex: 8:00AM - 10:00AM"/>
 					{/* <label className="label-tag" htmlFor="walkInsAllowed">Walk Ins Allowed:</label>
 					<input type='checkbox' name="walkInsAllowed"
@@ -246,7 +255,13 @@ populateEverything = async() => {
 						onChange={this.handleChange} autoComplete="off" placeholder=""/><br/>   */}
 						
 					<button type="submit" className="button-submit"> Submit Edit </button> <br/>
+					{
+						message !== ""
+						&&
+						<h2 className="message"> {message} </h2> 
+					}
 						
+					<Link className="link-home"to={routes.ROOT}> Back to Map </Link>
 				</NewForm>
 				:
 				<div>Loading</div>

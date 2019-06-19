@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
 import Search from "../Search/Search"
 import Geocode from "react-geocode"
 import styled from "styled-components";
 import Filter from "../Filter/Filter"
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react'
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react"
 
 
 const MainContainer = styled.div`
@@ -23,6 +23,7 @@ Geocode.enableDebug();
 
 export class MapContainer extends Component {
   state={
+    res: [],
     center:{},
     geo:navigator.geolocation,
     search: '',
@@ -281,15 +282,7 @@ export class MapContainer extends Component {
       clicked:false
     }
 
-    
-    success(position){
-      //Ethan is a wizard
-      let crd=position.coords
-      this.setState({
-        center:{lat:crd.latitude,
-          lng:crd.longitude}
-        })
-      }
+  
     
 
     setFilter = (filteredItems) => {
@@ -309,7 +302,23 @@ export class MapContainer extends Component {
         showFilterBar: false
       })
       
-    }  
+    }
+    handleGetResource = async () => {
+      try {
+        const getResources = await fetch("/resources", {
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        const parsedResponse = await getResources.json()
+        console.log(parsedResponse, "++++++")
+        return parsedResponse.resources
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
 
       
     setSearch = (states) => {
@@ -326,23 +335,39 @@ export class MapContainer extends Component {
           console.error(error);
         }
         );
-      }
+    }
     handleClick = (props, marker, e, i) => {
-      const { resource } = this.state
+      const { resource, res } = this.state
       this.setState({
           showingInfoWindow: true,
           activeMarker: marker,
-          selectedResource: this.state.resource[i],
-          center: {lat: resource[i].lat, lng: resource[i].lng},
+          selectedResource: res[i],
+          center: {lat: res[i].lat, lng: res[i].lng},
           
           clicked:true
       })
+      console.log(this.state.selectedResource)
     }
     componentDidMount(){
       this.state.geo.getCurrentPosition(
         (position) => this.success(position)
         )
-      }
+      this.handleGetResource().then(alldata => {
+        this.setState({
+          res: alldata
+        })
+      })
+    }
+    
+      
+    success(position){
+      //Ethan is a wizard
+      let crd=position.coords
+      this.setState({
+        center:{lat:crd.latitude,
+          lng:crd.longitude}
+        })
+    }  
     searching = (theSearch) => {
       this.setState({
         search: theSearch,
@@ -351,10 +376,10 @@ export class MapContainer extends Component {
       this.setSearch(theSearch)
     } 
     render() {
-      const { center, lat, lng, resource, zoom, filtered } = this.state
+      const { center, lat, lng, resource, zoom, filtered, showingInfoWindow, selectedResource, activeMarker, res } = this.state
       // console.log(this.state.filtered)
       // console.log(process.env)
-      // console.log(this.state, "=====")
+      console.log(this.state.res, "=====")
       return (
         <MainContainer>
           <Map  
@@ -370,7 +395,7 @@ export class MapContainer extends Component {
               filtered.length === 0
               ? 
 
-              resource.map((r,i)=>
+              res.map((r,i)=>
               <Marker key={i}
                   position={{lat: r.lat, lng: r.lng}}
                   icon={{
@@ -425,13 +450,14 @@ export class MapContainer extends Component {
                
               <Filter closeBar={this.props.closeBar} show={this.props.showFilterBar} resource={resource} setFilter={this.setFilter}/>
               {
-                  this.state.showingInfoWindow
+                  showingInfoWindow
                   &&
-                  <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
+                  <InfoWindow marker={activeMarker} visible={showingInfoWindow}>
                       <div>
-                          <h3>{this.state.selectedResource.operator}</h3><br/>
-                          <b>{this.state.selectedResource.resource}</b><br/>
-                          {this.state.selectedResource.phone}
+                          <h3>{selectedResource.operator}</h3><br/>
+                          <b>{selectedResource.resource}</b><br/>
+                          {selectedResource.phone}
+                          <a href={`/resources/${selectedResource._id}`}>Edit</a>
                       </div>
                   </InfoWindow>
               }

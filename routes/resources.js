@@ -9,7 +9,10 @@ router.get('/', async (req, res) => {
   
   try {
     const resources = await Resource.find({});
-    res.json({resources})
+    res.json({
+      resources,
+      success: resources ? true : false
+    })
   } catch (error) {
     res.json({error})
   }
@@ -53,10 +56,12 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/:id', async (req,res)=> {
   try {
-    const editedResource = await Resource.findByIdAndUpdate(req.params.id, req.body, {new:true});
-    editedResource.save()
+    const resource = await Resource.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    resource.save()
+    console.log(resource)
     res.json({
-      editedResource
+      resource,
+      success: resource ? true : false
     });
   } catch (error) {
     res.json({error})
@@ -66,7 +71,7 @@ router.put('/:id', async (req,res)=> {
 router.get('/:id', async (req, res) => {
   
   try {
-    const resource = await Resource.findById(this.params.id);
+    const resource = await Resource.findById(req.params.id);
     res.json({resource})
   } catch (error) {
     res.json({error})

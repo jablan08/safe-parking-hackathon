@@ -27,7 +27,8 @@ const MainContainer = styled(MDBContainer)`
     padding: 0.5rem .4rem;
   }
   .inside-container {
-    flex-wrap: nowrap !important;
+    padding-left: .03rem !important;
+    padding-right: .03rem !important;
     max-width: none !important;
   }
 `

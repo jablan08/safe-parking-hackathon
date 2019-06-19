@@ -33,6 +33,7 @@ const SideBar = styled.div`
     padding: 1.5rem;
     padding-top:10.5rem;
     text-align: center;
+    z-index: 1;
   }
   .filters {
     display: flex;

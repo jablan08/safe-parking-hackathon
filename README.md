@@ -1,6 +1,6 @@
-# Safe Parking Hackathon
+# Social Impact Safe Parking LA - Hackathon 
 
-## Prompt from SPLA: 
+## Prompt from Safe Parking LA: 
 
 Design a tool that puts all possible resources for transitionally homeless people in one place.  
 

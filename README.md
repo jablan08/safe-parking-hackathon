@@ -1,19 +1,19 @@
 # Safe Parking Hackathon
 
-##Prompt from SPLA: 
+## Prompt from SPLA: 
 
 Design a tool that puts all possible resources for transitionally homeless people in one place.  
 
-##Research Findings: 
+## Research Findings: 
 https://docs.google.com/document/d/1oOCQWYvEDx7PFJfUf1qqB0XFcKMsSk2ezSboMcW0LFM/edit?usp=sharing
 
-##Redefined Problem Statement:  
+## Redefined Problem Statement:  
 
 SPLA operators currently do not have an easy method to provide information about resources to transitionally homeless people. 
 
 How might we provide all the resources together so that the SPLA operators, and homeless people alike, can easily search for resources near them?
 
-##User Stories: 
+## User Stories: 
 As an SPLA operator, (or a transitional homeless person), I want to search for resources within a location so that I can help homeless people find resources close to their current location. 
 
 As an SPLA operator, (or a transitional homeless person), I want to filter for specific resources by distance so that I can tell people where they can get things like food, laundry facilities, or a shower near them.  

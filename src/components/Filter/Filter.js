@@ -21,7 +21,7 @@ const SideBar = styled.div`
   }
   .show-bar {
     height: 100%;
-    width: 50vw;
+    width: 25vw;
     position: fixed;
     top: 0;
     right: 0;

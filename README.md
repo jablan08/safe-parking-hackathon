@@ -11,7 +11,7 @@ Winner of Best in Category, with a team of 3 UX/UI designers and 3 software engi
 * Peter Nguyen
 * Ethan Kaplan
 
-![alt text]()
+![alt text](https://github.com/jablan08/safe-parking-hackathon/blob/master/public/images/SafeRMgif.gif)
 ## Prompt from Safe Parking LA: 
 
 Design a tool that puts all possible resources for transitionally homeless people in one place.  

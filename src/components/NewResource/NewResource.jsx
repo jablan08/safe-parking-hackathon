@@ -62,9 +62,8 @@ class NewResource extends Component{
     notes: "",
     lat: null,
     lng: null,
-    newResource: {}
-
-  
+    newResource: {},
+    error: ""
     
   }
   
@@ -79,13 +78,14 @@ class NewResource extends Component{
         }
       })
       const parsedResponse = await newResource.json();
-      console.log(parsedResponse)
       if (parsedResponse.success) {
         this.props.history.push(routes.ROOT)
       }
 
     } catch (error) {
-            console.log(error)
+      this.setState({
+				error: "There was an error processing your request."
+			})
     }
   }
 
@@ -114,7 +114,7 @@ class NewResource extends Component{
   }
 
   render(){
-      console.log(this.state.newResource)
+    
       return(
           <>
           {

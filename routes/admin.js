@@ -9,28 +9,21 @@ router.post("/login", async (req,res) =>{
   try {
       
       const foundAdmin = await Admin.findOne({"splaId": req.body.splaId}) 
-      console.log(foundAdmin)
       if (foundAdmin){
-        console.log("here")
+  
         if(foundAdmin.validPassword(req.body.password)) {
-            // req.session.logged = true;
-            // req.session.email = req.body.email;
-            // req.session.userDbId = foundAdmin._id;
-            // console.log(req.session)
             res.json({
                 user: foundAdmin,
                 status: 200,
                 success: foundAdmin ? true : false
             })
         } else {
-            // req.session.message = "Invalid Email or Password"
             res.json({
                 message: "req.session.message"
             })
         }
       } 
   } catch (error) {
-      // req.session.message = "Invalid Username or Password"
       res.json({
           message: "req.session.message"
       })
@@ -73,17 +66,14 @@ router.delete('/:id', async (req, res) => {
     await Admin.deleteMany({_id: { $in: deletedAdmin.clients }})
     res.json(deletedAdmin)
   } catch (error) {
-    console.log(error)
+    res.json({error})
   }
 })
 
 //Create Admin
 router.post('/new', async (req, res) => {
   try {
-    console.log(req.body)
     const newAdmin = await Admin.create(req.body)
-    console.log(newAdmin)
-    console.log("hit")
     res.json({
       newAdmin,
       success: newAdmin ? true : false

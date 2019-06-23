@@ -49,7 +49,8 @@ class Login extends Component {
 	state = { 
 			splaId: "",
 			password: "",
-			message: ""
+			message: "",
+			error: ""
 
 	}
 	handleChange = (e) =>
@@ -70,7 +71,6 @@ class Login extends Component {
 							}
 					})
 					const parsedResponse = await login.json();
-					console.log(parsedResponse)
 					if (parsedResponse.success) {
 							localStorage.setItem("user", JSON.stringify(parsedResponse.user));
 							this.setState({
@@ -84,7 +84,9 @@ class Login extends Component {
 							})
 					}
 			} catch (error) {
-					console.log(error)
+				this.setState({
+					error: "There was an error processing your request."
+				})
 			}
 	}
 	render() { 

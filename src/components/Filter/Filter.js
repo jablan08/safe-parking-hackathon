@@ -81,7 +81,8 @@ const SideBar = styled.div`
 class Filter extends Component {
   state = {
     data: [],
-    tags: []
+    tags: [],
+    error: ""
   }
   onChange = e => {
     // adds the filter the user selects into the array of filters
@@ -118,7 +119,6 @@ class Filter extends Component {
 
   render(){
     const showOrHide = this.props.show ? 'show-bar' : 'hide-bar'
-    console.log(this.state)
     return (
         <SideBar>
           <div className={showOrHide}>

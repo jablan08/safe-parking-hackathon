@@ -22,14 +22,12 @@ router.get('/', async (req, res) => {
 // Create resource
 router.post('/new', async (req, res) => {
   try {
-    console.log(req.body)
     if(req.body.walkInsAllowed==="on"){
       req.body.walkInsAllowed=true
     }else{
       req.body.walkInsAllowed=false
     }
     const newResource = await Resource.create(req.body)
-    console.log(newResource)
     res.json({
       newResource,
       success: newResource ? true : false
@@ -49,7 +47,7 @@ router.delete('/:id', async (req, res) => {
       success: deletedResource ? true : false
     })
   } catch (error) {
-    console.log(error)
+    res.json({error})
   }
 })
 
@@ -59,7 +57,6 @@ router.put('/:id', async (req,res)=> {
   try {
     const resource = await Resource.findByIdAndUpdate(req.params.id, req.body, {new:true});
     resource.save()
-    console.log(resource)
     res.json({
       resource,
       success: resource ? true : false

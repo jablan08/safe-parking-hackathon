@@ -74,7 +74,8 @@ class EditResource extends Component{
 		lat: null,
 		lng: null,
 		loaded:false,
-		id: null
+		id: null,
+		error: ""
 	}
 
 	editResource = async () => {
@@ -111,7 +112,9 @@ class EditResource extends Component{
 				})
 			}
 		} catch (error) {
-						console.log(error)
+			this.setState({
+				error: "There was an error processing your request."
+			})
 		}
 	}
 
@@ -141,12 +144,10 @@ class EditResource extends Component{
 
 
 	handleChange = (e) =>
-	{	console.log(e.target)
 		this.setState({
 				[e.target.name]: e.target.value
-	})}
+	})
 	handleTimeChange = (e) => {    
-		console.log(e.target)
 			this.setState({
 			hoursOfOperation:{
 				...this.state.hoursOfOperation,
@@ -187,10 +188,12 @@ class EditResource extends Component{
 				}
 			})
 			const res = await response.json()
-			console.log(res.resource, "====")
+	
 			return res.resource
 		} catch (error) {
-			console.log(error)
+			this.setState({
+				error: "There was an error processing your request."
+			})
 		}
 	}
 	handleDeleteResource = async (id) => {
@@ -213,7 +216,6 @@ class EditResource extends Component{
 
 
 	render(){
-		console.log(this.state)
 		const { resource, operator, address, phone, hoursOfOperation, message, id} = this.state
 		return(
 				this.state.loaded

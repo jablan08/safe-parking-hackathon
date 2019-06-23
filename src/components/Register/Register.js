@@ -36,6 +36,7 @@ class Register extends Component {
 			splaId: "",
 			password: "",
 			logged: false,
+			error: ""
 
 		};
 
@@ -57,7 +58,6 @@ class Register extends Component {
 							}
 					})
 					const parsedResponse = await createAdmin.json();
-					console.log(parsedResponse)
 							if (parsedResponse.success) {
 									localStorage.setItem("user", JSON.stringify(parsedResponse.newAdmin));
 									this.props.setCurrentUser(parsedResponse.newAdmin)
@@ -66,7 +66,9 @@ class Register extends Component {
 									})
 							}
 			} catch (error) {
-					console.log(error)
+				this.setState({
+					error: "There was an error processing your request."
+				})
 			}
 	}
 

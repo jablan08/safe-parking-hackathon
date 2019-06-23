@@ -33,7 +33,6 @@ export class MapContainer extends Component {
     search: '',
     lat: '',
     lng: '',
-  ],
   filtered: [],
   showingInfoWindow: false,
   activeMarker: {},

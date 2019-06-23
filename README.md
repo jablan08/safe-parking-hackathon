@@ -2,21 +2,22 @@
 Winner of Best in Category, with a team of 3 UX/UI designers and 3 software engineers.
 
 **UX/UI Team:**
-Gilly Moon 
-Raphael Dacanay
-Daniel Sjarif
+* Gilly Moon 
+* Raphael Dacanay
+* Daniel Sjarif
 
 **Software Engineers:**
-Joshua Ablan
-Peter Nguyen
-Ethan Kaplan
+* Joshua Ablan
+* Peter Nguyen
+* Ethan Kaplan
 
 ## Prompt from Safe Parking LA: 
 
 Design a tool that puts all possible resources for transitionally homeless people in one place.  
 
-## Research Findings: 
-https://docs.google.com/document/d/1oOCQWYvEDx7PFJfUf1qqB0XFcKMsSk2ezSboMcW0LFM/edit?usp=sharing
+## Research Findings:
+Day one of the hackathon the team conducted interviews with workers of the Safe Parking LA organization and the UX/UI team researched similar resources to SPLA. Here are the [findings](https://docs.google.com/document/d/1oOCQWYvEDx7PFJfUf1qqB0XFcKMsSk2ezSboMcW0LFM/edit?usp=sharing)
+
 
 ## Redefined Problem Statement:  
 

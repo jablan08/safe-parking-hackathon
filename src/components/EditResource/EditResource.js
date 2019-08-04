@@ -295,9 +295,6 @@ class EditResource extends Component{
 		)
 
 }
-
-
-
 }
 
 export default withRouter(EditResource)

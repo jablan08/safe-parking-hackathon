@@ -27,19 +27,20 @@ Geocode.enableDebug();
 
 export class MapContainer extends Component {
   state={
+
     res: [],
     center:{},
     geo:navigator.geolocation,
     search: '',
     lat: '',
     lng: '',
-  filtered: [],
-  showingInfoWindow: false,
-  activeMarker: {},
-  selectedResource: {},
-  zoom: 15,
-  clicked:false,
-  error: "",
+    filtered: [],
+    showingInfoWindow: false,
+    activeMarker: {},
+    selectedResource: {},
+    zoom: 15,
+    clicked:false,
+    error: ""
 }
     setFilter = (filteredItems) => {
       this.setState({
@@ -234,8 +235,11 @@ export class MapContainer extends Component {
 
 
                           {selectedResource.phone}
-
-                          <a href={`/resources/${selectedResource._id}`}>Edit</a>
+                          {
+                            this.props.currentUser.name 
+                            &&
+                            <a href={`/resources/${selectedResource._id}`}>Edit</a>
+                          }
                       </div>
                   </InfoWindow>
               }

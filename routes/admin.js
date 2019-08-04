@@ -8,10 +8,12 @@ const bcrypt = require('bcryptjs')
 router.post("/login", async (req,res) =>{
   try {
       
-      const foundAdmin = await Admin.findOne({"splaId": req.body.splaId}) 
+    const foundAdmin = await Admin.findOne({"splaId": req.body.splaId})
+    console.log(req.body,"++++++") 
       if (foundAdmin){
   
         if(foundAdmin.validPassword(req.body.password)) {
+            console.log("trueeee")
             res.json({
                 user: foundAdmin,
                 status: 200,

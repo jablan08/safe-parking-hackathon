@@ -51,7 +51,7 @@ class App extends Component {
     })
   }  
   doLogout= async () => {
-    await fetch("/login/logout", {
+    await fetch("/admin/logout", {
       credentials: "include",
       method: "POST",
       headers: {
@@ -70,7 +70,7 @@ class App extends Component {
       <div>
          <Navbar className="navbar" doLogout={this.doLogout} currentUser={currentUser} showFilterBar={showFilterBar} switchBar={this.switchBar} openBar={this.openBar}/>
          <Switch>
-          <Route exact path={routes.ROOT} render={()=>  <Map showFilterBar={showFilterBar} openFilter={this.openBar} closeBar={this.closeBar}/> }/> 
+          <Route exact path={routes.ROOT} render={()=>  <Map showFilterBar={showFilterBar} openFilter={this.openBar} closeBar={this.closeBar} currentUser={currentUser}/> }/> 
           <Route exact path={routes.REGISTER} render={() => <Register currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.LOGIN} render={()=> <Login currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />
           <Route exact path={routes.POST} render={()=> <NewResource currentUser={currentUser} setCurrentUser={this.setCurrentUser}/>} />

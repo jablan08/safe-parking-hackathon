@@ -20,7 +20,7 @@
     "lodash.template": "^4.5.0",
     "mdbootstrap": "^4.8.2",
     "mdbreact": "^4.16.0",
-    "mongoose": "^5.5.12",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.1",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.9",
